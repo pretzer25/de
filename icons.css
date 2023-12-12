@@ -111,3 +111,10 @@
   background: #CD201F;
   color: #ffffff;
 }
+
+.wrapper .homework:hover,
+.wrapper .homework:hover .tooltip,
+.wrapper .homework:hover .tooltip::before {
+  background: #CD201F;
+  color: #ffffff;
+}
