@@ -80,41 +80,41 @@
 .wrapper .facebook:hover,
 .wrapper .facebook:hover .tooltip,
 .wrapper .facebook:hover .tooltip::before {
-  background: #1877F2;
+  background: #000000;
   color: #ffffff;
 }
 
 .wrapper .twitter:hover,
 .wrapper .twitter:hover .tooltip,
 .wrapper .twitter:hover .tooltip::before {
-  background: #1DA1F2;
+  background: #000000;
   color: #ffffff;
 }
 
 .wrapper .instagram:hover,
 .wrapper .instagram:hover .tooltip,
 .wrapper .instagram:hover .tooltip::before {
-  background: #E4405F;
+  background: #000000;
   color: #ffffff;
 }
 
 .wrapper .github:hover,
 .wrapper .github:hover .tooltip,
 .wrapper .github:hover .tooltip::before {
-  background: #333333;
+  background: #000000;
   color: #ffffff;
 }
 
 .wrapper .youtube:hover,
 .wrapper .youtube:hover .tooltip,
 .wrapper .youtube:hover .tooltip::before {
-  background: #CD201F;
+  background: #000000;
   color: #ffffff;
 }
 
 .wrapper .homework:hover,
 .wrapper .homework:hover .tooltip,
 .wrapper .homework:hover .tooltip::before {
-  background: #CD201F;
+  background: #000000;
   color: #ffffff;
 }
