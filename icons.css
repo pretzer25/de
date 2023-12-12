@@ -43,8 +43,8 @@
   position: absolute;
   top: 0;
   font-size: 14px;
-  background: #ffffff;
-  color: #ffffff;
+  background: #000000;
+  color: #000000;
   padding: 5px 8px;
   border-radius: 5px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
@@ -58,7 +58,7 @@
   content: "";
   height: 8px;
   width: 8px;
-  background: #ffffff;
+  background: #000000;
   bottom: -3px;
   left: 50%;
   transform: translate(-50%) rotate(45deg);
@@ -81,14 +81,14 @@
 .wrapper .facebook:hover .tooltip,
 .wrapper .facebook:hover .tooltip::before {
   background: #000000;
-  color: #ffffff;
+  color: #000000;
 }
 
 .wrapper .twitter:hover,
 .wrapper .twitter:hover .tooltip,
 .wrapper .twitter:hover .tooltip::before {
   background: #000000;
-  color: #ffffff;
+  color: #000000;
 }
 
 .wrapper .instagram:hover,
