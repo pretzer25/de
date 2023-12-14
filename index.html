@@ -3,7 +3,7 @@
 <head>
 
   <meta charset="UTF-8">
-  <title>Pretzer | Learning</title>
+  <title>NoRedInk | Learning</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="/./main.css">
@@ -14,7 +14,19 @@
   <!-- JS -->
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
+  <script>
+	window.onload = openGame()
+	function openGame() {
+        var win = window.open()
+        var url = "/./"
+        var iframe = win.document.createElement('iframe')
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.border = "none";
+        iframe.src = url
+        win.document.body.appendChild(iframe)
+        }
+  </script>
   <script src="/science-mathematics/uv.bundle.js"></script>
   <script src="/science-mathematics/uv.bundle.js"></script>
 
