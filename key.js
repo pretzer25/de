@@ -24,15 +24,12 @@ function getRandomPageIndex() {
   return Math.floor(Math.random() * allowedUrls.length);
 }
 
-document.addEventListener("keydown", function(event) {
-  if (event.key === "l") { // Change '0' to a less common key
-    event.preventDefault();
-    const randomPageIndex = getRandomPageIndex();
-    const url = allowedUrls[randomPageIndex];
-    if (isValidUrl(url)) {
-      window.open(url, "_blank");
-    } else {
-      console.warn("Invalid URL detected. Skipping...");
-    }
+function openRandomStudyResource() {
+  const randomPageIndex = getRandomPageIndex();
+  const url = allowedUrls[randomPageIndex];
+  if (isValidUrl(url)) {
+    window.open(url, "_blank");
+  } else {
+    console.warn("Invalid URL detected. Skipping...");
   }
-});
+}
