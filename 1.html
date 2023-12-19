@@ -1,18 +1,22 @@
 <html>
 <head>
 </head>
-<body>
-  <body onload="file">
+<body onload="file()">
 <script>
 function file() {
-var win = window.open()
-var url = "/./"
-var iframe = win.document.createElement('iframe')
-iframe.style.width = "100%";
-iframe.style.height = "100%";
-iframe.style.border = "none";
-iframe.src = url
-win.document.body.appendChild(iframe)
+  // Use window.location.href for loading the current page
+  // var url = window.location.href;
+
+  // Define window properties and URL explicitly
+  var win = window.open('','','width=400,height=300');
+  var url = 'https://your-intended-url.com'; // Replace with your actual URL
+
+  var iframe = win.document.createElement('iframe');
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.border = "none";
+  iframe.src = url;
+  win.document.body.appendChild(iframe);
 }
 </script>
 </body>
