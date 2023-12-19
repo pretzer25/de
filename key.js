@@ -24,12 +24,22 @@ function getRandomPageIndex() {
   return Math.floor(Math.random() * allowedUrls.length);
 }
 
-function openRandomStudyResource() {
+const button = document.getElementById("open-study-resources");
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "l") {
+    button.style.display = "block"; // Show the button when "L" is pressed
+  }
+});
+
+button.addEventListener("click", function(event) {
+  event.preventDefault();
   const randomPageIndex = getRandomPageIndex();
   const url = allowedUrls[randomPageIndex];
   if (isValidUrl(url)) {
     window.open(url, "_blank");
+    button.style.display = "none"; // Hide the button after click
   } else {
     console.warn("Invalid URL detected. Skipping...");
   }
-}
+});
