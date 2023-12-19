@@ -1,23 +1,48 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Embedded Content</title>
+  <style>
+    .embed-container {
+      position: relative;
+      padding-bottom: 70.75%;
+      height: 0;
+      overflow: hidden;
+    }
+    .embed-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
 </head>
-<body onload="file()">
-<script>
-function file() {
-  // Use window.location.href for loading the current page
-  // var url = window.location.href;
+<body>
+  <script>
+    function file() {
+      // Use window.location.href for loading the current page
+      // var url = window.location.href;
 
-  // Define window properties and URL explicitly
-  var win = window.open('','','width=400,height=300');
-  var url = '/./'; // Replace with your actual URL
+      // Define window properties and URL explicitly
+      var win = window.open('', '', 'width=400,height=300');
+      var url = 'https://your-actual-url-here'; // Replace with your actual URL
 
-  var iframe = win.document.createElement('iframe');
-  iframe.style.width = "100%";
-  iframe.style.height = "100%";
-  iframe.style.border = "none";
-  iframe.src = url;
-  win.document.body.appendChild(iframe);
-}
-</script>
+      var iframe = win.document.createElement('iframe');
+      iframe.src = url;
+
+      // Wrap the iframe in an element with the "embed-container" class
+      var container = win.document.createElement('div');
+      container.classList.add('embed-container');
+      container.appendChild(iframe);
+
+      win.document.body.appendChild(container);
+    }
+    file(); // Execute the file() function on page load
+  </script>
 </body>
 </html>
+
+
