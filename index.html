@@ -1,5 +1,17 @@
 <!--test1-->
 <html lang="en" >
+	<style>
+#popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+	</style>
 <head>
 
   <meta charset="UTF-8">
@@ -158,7 +170,9 @@
 	<div class="container-apps">
 
 		<!-- Divider -->
-<button id="open-study-resources" style="display: none;">Open Study Resources</button>
+  <p id="popup-url"></p>
+  <button onclick="window.open(document.getElementById('popup-url').textContent, '_blank')">Open It!</button>
+  <button onclick="document.getElementById('popup').style.display = 'none'">Close</button>
 
 		
 		<div class="column">
