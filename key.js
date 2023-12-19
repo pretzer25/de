@@ -1,8 +1,9 @@
-const pages = [
-  "https://mail.google.com/mail/?authuser=0",
-  "https://translate.google.com/?authuser=0",
+const allowedUrls = [
+  // Secure URLs without authuser parameter
+  "https://mail.google.com/",
+  "https://translate.google.com/",
   "https://www.google.com/",
-  "https://drive.google.com/?authuser=0",
+  "https://drive.google.com/",
   "https://www.classlink.com/",
   "https://classroom.google.com/",
   "https://www.khanacademy.org/",
@@ -12,14 +13,26 @@ const pages = [
   // Add more URLs to your list...
 ];
 
+// Validate URL before opening
+function isValidUrl(url) {
+  // Implement your URL validation logic here
+  // You can check for whitelisted domains, specific patterns, etc.
+  return true; // Replace with your actual validation logic
+}
+
 function getRandomPageIndex() {
-  return Math.floor(Math.random() * pages.length);
+  return Math.floor(Math.random() * allowedUrls.length);
 }
 
 document.addEventListener("keydown", function(event) {
-  if (event.key === "0" && event.key === "o") {
+  if (event.key === "l") { // Change '0' to a less common key
     event.preventDefault();
     const randomPageIndex = getRandomPageIndex();
-    window.open(pages[randomPageIndex], "_blank");
+    const url = allowedUrls[randomPageIndex];
+    if (isValidUrl(url)) {
+      window.open(url, "_blank");
+    } else {
+      console.warn("Invalid URL detected. Skipping...");
+    }
   }
 });
