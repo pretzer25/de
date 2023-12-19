@@ -24,18 +24,12 @@ function getRandomPageIndex() {
   return Math.floor(Math.random() * allowedUrls.length);
 }
 
-const popup = document.getElementById("popup");
-const popupUrlElement = document.getElementById("popup-url");
-
-document.addEventListener("keydown", function(event) {
-  if (event.key === "l") {
-    const randomPageIndex = getRandomPageIndex();
-    const url = allowedUrls[randomPageIndex];
-    if (isValidUrl(url)) {
-      popupUrlElement.textContent = url;
-      popup.style.display = "block";
-    } else {
-      console.warn("Invalid URL detected. Skipping...");
-    }
+function openRandomStudyResource() {
+  const randomPageIndex = getRandomPageIndex();
+  const url = allowedUrls[randomPageIndex];
+  if (isValidUrl(url)) {
+    window.open(url, "_blank");
+  } else {
+    console.warn("Invalid URL detected. Skipping...");
   }
-});
+}
