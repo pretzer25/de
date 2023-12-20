@@ -168,16 +168,16 @@
       const searchTerm = document.getElementById("searchInput").value;
 
       // Check for URL patterns with common domain extensions
-      const isWebsite = /\.(com|org|net|edu|gov|co)(\.[a-z]{2})?$/.test(searchTerm);
+      const isWebsite = /\.(com|org|app|net|edu|gov|co)(\.[a-z]{2})?$/.test(searchTerm);
 
       if (isWebsite) {
         let url = searchTerm;
         if (!url.startsWith("http")) { // Add HTTPS if it's missing
           url = "https://" + url;
         }
-        window.location.href = "/./display.html?url=" + url;
+        window.location.href = "/./files/google.html?url=" + url;
       } else {
-        window.location.href = "/./display.html?search=" + encodeURIComponent(searchTerm);
+        window.location.href = "/./files/google.html?search=" + encodeURIComponent(searchTerm);
       }
     }
   </script>
