@@ -160,6 +160,29 @@
 	<br>
         <br>
 	<br>
+  <input type="text" id="searchInput" placeholder="Enter a website or search term">
+  <button onclick="searchAndDisplay()">Search</button>
+
+  <script>
+    function searchAndDisplay() {
+      const searchTerm = document.getElementById("searchInput").value;
+
+      // Check for URL patterns with common domain extensions
+      const isWebsite = /\.(com|org|net|edu|gov|co)(\.[a-z]{2})?$/.test(searchTerm);
+
+      if (isWebsite) {
+        let url = searchTerm;
+        if (!url.startsWith("http")) { // Add HTTPS if it's missing
+          url = "https://" + url;
+        }
+        window.location.href = "/./display.html?url=" + url;
+      } else {
+        window.location.href = "/./display.html?search=" + encodeURIComponent(searchTerm);
+      }
+    }
+  </script>
+</body>
+</html>
 	<div class="container-apps">
 
 		<!-- Divider -->
