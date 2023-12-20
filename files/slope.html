@@ -1,20 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<style>
-    body{
-        margin: 0; /* Remove default margin */
-    }
-    iframe{
-        display: block;  /* iframes are inline by default */
-        height: 100vh;  /* Set height to 100% of the viewport height */
-        width: 100vw;  /* Set width to 100% of the viewport width */
-        border: none; /* Remove default border */
-        background: lightyellow; /* Just for styling */
-    }
-</style>
+	<meta charset="UTF-8">
+	<style>
+		html, body {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			overflow: hidden;
+		}
+		iframe {
+			display: block;
+			width: calc(100% - 40px);
+			height: calc(100% - 40px);
+			margin: 20px;
+		}
+		img {
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+	</style>
+	<script src="https://unpkg.com/@ungap/custom-elements-builtin"></script>
+	<script src="/./scripts/x-frame-bypass.js" type="module"></script>
 </head>
 <body>
-    <iframe src="https://slope-1.runningfred333.repl.co"></iframe>
+        <iframe is="x-frame-bypass" src="https://slope-1.runningfred333.repl.co"></iframe>
+
 </body>
 </html>
