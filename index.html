@@ -12,13 +12,15 @@
 function file() {
   var url = '/./go.html'; // Replace with your actual URL
 
-  // Create the iframe directly in the current document
-  var iframe = document.createElement('iframe');
+  // Create the iframe in a new about:blank window
+  var blankWindow = window.open('about:blank');
+  var iframe = blankWindow.document.createElement('iframe');
+
   iframe.style.width = "100%";
   iframe.style.height = "100%";
   iframe.style.border = "none";
   iframe.src = url;
-  document.body.appendChild(iframe);
+  blankWindow.document.body.appendChild(iframe);
 }
 </script>
 
