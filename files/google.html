@@ -24,39 +24,11 @@
 			top: 0;
 			right: 0;
 		}
-    .navbtn1, .navbtn2 {
-      float: right; /* Remove float to avoid overlapping */
-      border-radius: 100%;
-      width: 50px;
-      height: 50px;
-      background-color: rgba(255, 255, 255, 0.2);
-      border: none;
-      position: fixed;
-      z-index: 2; /* Ensure buttons are above other elements */
-      cursor: pointer;
-    }
-
-    .navbtn1 {
-      top: 70px;
-      right: 10px;
-    }
-
-    .navbtn2 {
-      top: 130px;
-      right: 10px;
-    }
 	</style>
 	<script src="https://unpkg.com/@ungap/custom-elements-builtin"></script>
 	<script src="/./scripts/x-frame-bypass.js" type="module"></script>
 </head>
 <body>
         <iframe is="x-frame-bypass" src="https://search.brave.com"></iframe>
-	  <button onclick="toggleFullscreen()" class="navbtn1">
-    <i class="fa-solid fa-rotate-right"></i>
-  </button>
-  <button onclick="location.href='/./'" id="home-page" class="navbtn2">
-    <i class="fa-solid fa-house"></i>
-  </button>
-
 </body>
 </html>
