@@ -30,5 +30,12 @@
 </head>
 <body>
         <iframe is="x-frame-bypass" src="https://search.brave.com"></iframe>
+<script>
+    document.addEventListener('keydown', function(event) {
+      if (event.ctrlKey && event.key === 'KeyO') {
+        location.href = '/./';
+      }
+    });
+  </script>
 </body>
 </html>
