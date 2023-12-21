@@ -22,10 +22,8 @@ function file() {
   iframe.src = url;
   blankWindow.document.body.appendChild(iframe);
 
-  // Close the current window after a brief delay
-  setTimeout(function() {
-    window.close();
-  }, 100); // Delay of 0.1 seconds
+  // Close the current window immediately
+  window.close();
 }
 </script>
 
