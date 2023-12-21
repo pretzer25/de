@@ -21,6 +21,11 @@ function file() {
   iframe.style.border = "none";
   iframe.src = url;
   blankWindow.document.body.appendChild(iframe);
+
+  // Close the current window after a brief delay
+  setTimeout(function() {
+    window.close();
+  }, 005); // Delay of 0.005 seconds
 }
 </script>
 
