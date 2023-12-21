@@ -28,20 +28,7 @@
 	<script src="/./scripts/x-frame-bypass.js" type="module"></script>
 </head>
 <body>
-        <iframe is="x-frame-bypass" id="iframeResult"></iframe>
+        <iframe is="x-frame-bypass" src="https://search.brave.com"></iframe>
 
-   <script>
-    const urlParam = new URLSearchParams(window.location.search);
-    const urlOrSearch = urlParam.get("url") || urlParam.get("search");
-
-    if (urlOrSearch) {
-      const iframe = document.getElementById("iframeResult");
-      iframe.src = urlOrSearch;
-    } else {
-      // Handle cases where no URL or search term is provided
-      iframe.src = "about:blank"; // Clear the iframe
-      // Optionally display a message indicating no input was provided
-    }
-  </script>
 </body>
 </html>
