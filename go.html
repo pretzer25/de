@@ -297,11 +297,6 @@
 	<!-- End Partial -->
 
 
-<div id="popup" style="display: none;">
-  <p>The file has been downloaded!</p>
-  <button onclick="closePopup()">Close</button>
-</div>
-
 <script>
 function downloadAndShowPopup() {
   // Create a temporary link for download
@@ -309,16 +304,6 @@ function downloadAndShowPopup() {
   link.href = "/./files/fort.html"; // Replace with your actual file URL
   link.download = "test.pdf"; // Adjust the filename if needed
   link.click();
-
-  // Show the popup after a short delay to allow for download initiation
-  setTimeout(() => {
-    document.getElementById("popup").style.display = "block";
-  }, 500); // Adjust the delay as needed
-}
-
-function closePopup() {
-  document.getElementById("popup").style.display = "none";
-}
 </script>
 
 </body>
