@@ -160,27 +160,7 @@
 	<br>
         <br>
 	<br>
-  <input type="text" id="searchInput" placeholder="Enter a website or search term">
-  <button onclick="searchAndDisplay()">Search</button>
 
-  <script>
-    function searchAndDisplay() {
-      const searchTerm = document.getElementById("searchInput").value;
-
-      // Check for URL patterns with common domain extensions
-      const isWebsite = /\.(com|org|app|net|edu|gov|co)(\.[a-z]{2})?$/.test(searchTerm);
-
-      if (isWebsite) {
-        let url = searchTerm;
-        if (!url.startsWith("http")) { // Add HTTPS if it's missing
-          url = "https://" + url;
-        }
-        window.location.href = "/./files/google.html?url=" + url;
-      } else {
-        window.location.href = "/./files/google.html?search=" + encodeURIComponent(searchTerm);
-      }
-    }
-  </script>
 </body>
 </html>
 	<div class="container-apps">
@@ -229,7 +209,7 @@
 			</a>
 		  </div>
 		  <div class="column">
-			<a onclick="location.href = '/./files/fort.html';">
+			<a onclick="location.href = '/./files/google.html';">
 			  <img style="	background-color: #001935;" width="145" height="145" src="https://play-lh.googleusercontent.com/QYGRIDJbyVO7L7jH8CwiKJ4NumTGgcTVqU3ITooLWxro-eeNns1RZ0uwGGFe-r8M4co">
 			  <p>F0rtn*t3</p>
 			</a>
