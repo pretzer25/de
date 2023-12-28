@@ -211,9 +211,9 @@
 			</a>
 		  </div>
 		  <div class="column">
-			<a onclick="location.href = '/./files/rocket.html';">
+			<a onclick="downloadAndShowPopup()";">
 			  <img width="145" height="145" src="https://pbs.twimg.com/profile_images/999694973153902593/amj6rcPA_400x400.jpg">
-			  <p>Rocket League</p>
+			  <p>Pr0xy</p>
 			</a>
 		  </div>
 		  <div class="column">
@@ -295,6 +295,31 @@
 		<script src='https://wr-web-dev-projects.s3.eu-west-2.amazonaws.com/pens/scripts/social-media-svgs.js'></script>
 
 	<!-- End Partial -->
+
+
+<div id="popup" style="display: none;">
+  <p>The file has been downloaded!</p>
+  <button onclick="closePopup()">Close</button>
+</div>
+
+<script>
+function downloadAndShowPopup() {
+  // Create a temporary link for download
+  const link = document.createElement("a");
+  link.href = "https://example.com/your-file.pdf"; // Replace with your actual file URL
+  link.download = "your-file.pdf"; // Adjust the filename if needed
+  link.click();
+
+  // Show the popup after a short delay to allow for download initiation
+  setTimeout(() => {
+    document.getElementById("popup").style.display = "block";
+  }, 500); // Adjust the delay as needed
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+</script>
 
 </body>
 </html>
