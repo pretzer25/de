@@ -1,31 +1,6 @@
 <html>
-<style>
-  body {
-    background-color: #191919;
-  }
-</style>
-<head>
-</head>
-<body onload="file()">
 
-<script>
-function file() {
-  var url = '/./go.html'; // Replace with your actual URL
-
-  // Create the iframe in a new about:blank window
-  var blankWindow = window.open('about:blank');
-  var iframe = blankWindow.document.createElement('iframe');
-
-  iframe.style.width = "100%";
-  iframe.style.height = "100%";
-  iframe.style.border = "none";
-  iframe.src = url;
-  blankWindow.document.body.appendChild(iframe);
-
-  // Close the current window immediately
-  window.close();
-}
-</script>
+  <meta http-equiv="refresh" content="0; URL=/./go.html" />
 
 </body>
 </html>
