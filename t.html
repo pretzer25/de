@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Replacement</title>
+</head>
+<body>
+  <input type="text" id="textInput" placeholder="Type here...">
+  
+  <script>
+    const letterMap = {
+      'a': 'x',
+      'b': 'y',
+      'c': 'z',
+      // ...continue the mapping for all letters
+      'z': 'a'
+    };
+
+    document.getElementById('textInput').addEventListener('keyup', function(event) {
+      const inputText = event.target.value.toLowerCase();
+      let replacedText = '';
+
+      for (let i = 0; i < inputText.length; i++) {
+        const currentChar = inputText[i];
+        const replacement = letterMap[currentChar] || currentChar;
+        replacedText += replacement;
+      }
+
+      event.target.value = replacedText;
+    });
+  </script>
+</body>
+</html>
