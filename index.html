@@ -1,3 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Background with Protection</title>
+<style>
+body {
+  background-image: url("/./error.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+</style>
+</head>
+<body>
+
+<div class="overlay"></div> <script>
+document.body.addEventListener('contextmenu', function(event) {
+  event.preventDefault();
+});
+
+document.body.style.userSelect = 'none';
+</script>
+
 <script>
   let enterKeyPressCount = 0;
 
@@ -13,3 +45,7 @@ document.addEventListener("keydown", function(event) {
 });
 
 </script>
+
+</body>
+</html>
+
