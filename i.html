@@ -2,101 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Key Dragging</title>
+  <title>Mouse Path</title>
+  <style>
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
 </head>
 <body>
-  <div id="mouseIndicator" style="position: absolute; width: 10px; height: 10px; border-radius: 50%; background-color: black;"></div>
-
+  <div id="mouseIndicator" style="position: absolute; width: 10px; height: 10px; border-radius: 50%; background-color: red;"></div>
   <script>
-    const keyStartCoordinates = {
-      'y': { x: 50, y: 50 }, // 'y' key start coordinates
-      'd': { x: 100, y: 100 }, // 'd' key start coordinates
-      // Add more keys and their start coordinates as needed
-    };
+    let prevX = 0;
+    let prevY = 0;
 
-    const keyEndCoordinates = {
-      'y': { x: 200, y: 200 }, // 'y' key end coordinates
-      'd': { x: 250, y: 250 }, // 'd' key end coordinates
-      // Add more keys and their end coordinates as needed
-    };
-
-    let isDragging = false;
-    let dragStartCoords = { x: 0, y: 0 };
-
-    const simulateMouseDown = (x, y) => {
-      const mouseDownEvent = new MouseEvent('mousedown', {
-        bubbles: true,
-        clientX: x,
-        clientY: y
-      });
-
-      document.elementFromPoint(x, y).dispatchEvent(mouseDownEvent);
-    };
-
-    const simulateMouseMove = (x, y) => {
-      const mouseMoveEvent = new MouseEvent('mousemove', {
-        bubbles: true,
-        clientX: x,
-        clientY: y
-      });
-
-      document.elementFromPoint(x, y).dispatchEvent(mouseMoveEvent);
-      updateMouseIndicator(x, y); // Update mouse indicator position
-      createTrail(x, y); // Create a trail
-    };
-
-    const simulateMouseUp = (x, y) => {
-      const mouseUpEvent = new MouseEvent('mouseup', {
-        bubbles: true,
-        clientX: x,
-        clientY: y
-      });
-
-      document.elementFromPoint(x, y).dispatchEvent(mouseUpEvent);
-    };
+    const canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     const updateMouseIndicator = (x, y) => {
       const mouseIndicator = document.getElementById('mouseIndicator');
       mouseIndicator.style.left = `${x}px`;
       mouseIndicator.style.top = `${y}px`;
+
+      drawLine(x, y);
     };
 
-    const createTrail = (x, y) => {
-      const trail = document.createElement('div');
-      trail.classList.add('trail');
-      trail.style.left = `${x}px`;
-      trail.style.top = `${y}px`;
-      document.body.appendChild(trail);
-      setTimeout(() => {
-        trail.style.opacity = 0;
-        setTimeout(() => {
-          trail.remove();
-        }, 1000);
-      }, 4000);
+    const drawLine = (x, y) => {
+      ctx.beginPath();
+      ctx.moveTo(prevX, prevY);
+      ctx.lineTo(x, y);
+      ctx.strokeStyle = 'blue'; // Change the line color if needed
+      ctx.lineWidth = 2; // Change the line width if needed
+      ctx.stroke();
+      prevX = x;
+      prevY = y;
     };
 
-    document.addEventListener('keydown', function(event) {
-      const key = event.key.toLowerCase();
-      
-      if (keyStartCoordinates[key]) {
-        isDragging = true;
-        dragStartCoords = keyStartCoordinates[key];
-        simulateMouseDown(dragStartCoords.x, dragStartCoords.y);
-      }
-    });
-
-    document.addEventListener('keyup', function(event) {
-      const key = event.key.toLowerCase();
-
-      if (isDragging && keyEndCoordinates[key]) {
-        isDragging = false;
-        simulateMouseMove(keyEndCoordinates[key].x, keyEndCoordinates[key].y);
-        simulateMouseUp(keyEndCoordinates[key].x, keyEndCoordinates[key].y);
-      }
-    });
-
-    document.getElementById('redirectButton').addEventListener('click', function() {
-      window.location.href = '/./index.html';
+    document.addEventListener('mousemove', function(event) {
+      updateMouseIndicator(event.clientX, event.clientY);
     });
   </script>
 </body>
