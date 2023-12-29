@@ -1,20 +1,12 @@
 <script>
-  
-let oKeyPressCount = 0;
+let enterKeyPressCount = 0;
 
-window.addEventListener('load', () => {
-  // Simulate "website not found" error
-  const err = new Error('Website not found');
-  err.name = 'NotFoundError';
-  throw err;
-});
-
-window.addEventListener('keydown', (event) => {
-  if (event.key === 'o') {
-    oKeyPressCount++;
-    if (oKeyPressCount === 4) {
-      // Redirect to /./go.html
-      window.location.href = './go.html';
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    enterKeyPressCount++;
+    if (enterKeyPressCount === 4) {
+      alert('hi.');
+      enterKeyPressCount = 0; // Reset the count after the alert
     }
   }
 });
