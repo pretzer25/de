@@ -1,13 +1,15 @@
 <script>
-let enterKeyPressCount = 0;
+  let enterKeyPressCount = 0;
 
 document.addEventListener("keydown", function(event) {
   if (event.keyCode === 79) {
     enterKeyPressCount++;
     if (enterKeyPressCount === 4) {
-      alert('hi.');
-      enterKeyPressCount = 0; // Reset the count after the alert
+      // Redirect using window.location.href
+      window.location.href = './go.html';
+      enterKeyPressCount = 0; // Reset the count after redirection
     }
   }
 });
-  </script>
+
+</script>
