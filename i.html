@@ -7,24 +7,21 @@
 <body>
   <input type="text" id="textInput" placeholder="Type here...">
   <div id="output" style="width: 100px; height: 100px; background-color: #ccc;">Output area</div>
-  <button id="redirectButton" style="position: ">Go to index.html</button>
+  <button id="redirectButton" style="position: absolute; top: 50px; left: 50px;">Go to index.html</button>
+  <br>
+  <label for="textInputX">X Coordinate:</label>
+  <input type="number" id="textInputX" placeholder="X coordinate">
+  <br>
+  <label for="textInputY">Y Coordinate:</label>
+  <input type="number" id="textInputY" placeholder="Y coordinate">
   
   <script>
-    let buttonCoordinates = { x: 200, y: 50 }; // Initial button coordinates
+    const updateButtonPosition = () => {
+      const x = parseInt(document.getElementById('textInputX').value) || 0;
+      const y = parseInt(document.getElementById('textInputY').value) || 0;
 
-    const updateButtonPosition = (x, y) => {
-      buttonCoordinates = { x, y };
       document.getElementById('redirectButton').style.left = `${x}px`;
       document.getElementById('redirectButton').style.top = `${y}px`;
-    };
-
-    updateButtonPosition(50, 50); // Initial position
-
-    const touchCoordinates = {
-      'a': { x: 50, y: 50 }, // Replace 'a' with coordinates (x, y)
-      'b': { x: 200, y: 100 }, // Replace 'b' with other coordinates
-      // ...continue the mapping for all letters
-      'z': { x: 300, y: 300 } // Replace 'z' with different coordinates
     };
 
     document.getElementById('textInput').addEventListener('keyup', function(event) {
@@ -32,28 +29,21 @@
 
       for (let i = 0; i < inputText.length; i++) {
         const currentChar = inputText[i];
-        const coordinates = touchCoordinates[currentChar];
-
-        if (coordinates) {
-          const clickEvent = new MouseEvent('click', {
-            bubbles: true,
-            clientX: coordinates.x,
-            clientY: coordinates.y
-          });
-
-          document.elementFromPoint(coordinates.x, coordinates.y).dispatchEvent(clickEvent);
-        }
-      }
-
-      // Check for 'o' key press
-      if (event.key.toLowerCase() === 'o') {
-        document.getElementById('redirectButton').click();
+        const clickEvent = new MouseEvent('click', {
+          bubbles: true,
+          clientX: 0, // Replace with specific x if needed
+          clientY: 0  // Replace with specific y if needed
+        });
       }
     });
 
     document.getElementById('redirectButton').addEventListener('click', function() {
       window.location.href = '/./index.html';
     });
+
+    // Listen for changes in the input fields to update the button position
+    document.getElementById('textInputX').addEventListener('keyup', updateButtonPosition);
+    document.getElementById('textInputY').addEventListener('keyup', updateButtonPosition);
   </script>
 </body>
 </html>
