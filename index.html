@@ -1,11 +1,4 @@
 <script>
-
-  window.addEventListener('load', () => {
-  const err = new Error('Connection refused');
-  err.name = 'ConnectionRefusedError';
-  throw err;
-});
-  
   let enterKeyPressCount = 0;
 
 document.addEventListener("keydown", function(event) {
