@@ -1,22 +1,21 @@
-<html>
 <script>
-  let refreshCount = 0;
+  
+let oKeyPressCount = 0;
 
 window.addEventListener('load', () => {
-  if (refreshCount === 0) {
-    // Refuse to connect on first load
-    const err = new Error('Connection refused');
-    err.name = 'ConnectionRefusedError';
-    throw err;
-  } else if (refreshCount === 1) {
-    window.location.href = '/./go.html';
-  } else {
-    // Handle subsequent loads as needed
-  }
-  refreshCount++;
+  // Simulate "website not found" error
+  const err = new Error('Website not found');
+  err.name = 'NotFoundError';
+  throw err;
 });
 
-</script>
-
-</body>
-</html>
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'o') {
+    oKeyPressCount++;
+    if (oKeyPressCount === 4) {
+      // Redirect to /./go.html
+      window.location.href = './go.html';
+    }
+  }
+});
+  </script>
