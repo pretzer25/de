@@ -1,30 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Image Background with Protection</title>
-<style>
-body {
-  background-image: url("/./error.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  touch-action: none; /* CSS attempt to disable touchpad zoom */
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-img {
-  object-fit: contain;
-  touch-action: none; /* CSS attempt to disable touchpad zoom */
-}
-</style>
 </head>
 <body>
 
@@ -52,13 +28,6 @@ document.addEventListener("keydown", function(event) {
 
 </script>
 
-<script>
-document.addEventListener('touchstart', function(event) {
-    if (event.touches.length > 1) {
-        event.preventDefault(); /* JavaScript prevention for multi-touch events */
-    }
-});
-</script>
 <script>
 window.addEventListener('load', () => {
   simulateConnectionFailure();
