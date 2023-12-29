@@ -8,20 +8,22 @@
   <input type="text" id="textInput" placeholder="Type here...">
   <div id="output" style="width: 100px; height: 100px; background-color: #ccc;">Output area</div>
   <button id="redirectButton" style="position: absolute; top: 50px; left: 50px;">Go to index.html</button>
-  <br>
-  <label for="textInputX">X Coordinate:</label>
-  <input type="number" id="textInputX" placeholder="X coordinate">
-  <br>
-  <label for="textInputY">Y Coordinate:</label>
-  <input type="number" id="textInputY" placeholder="Y coordinate">
   
   <script>
-    const updateButtonPosition = () => {
-      const x = parseInt(document.getElementById('textInputX').value) || 0;
-      const y = parseInt(document.getElementById('textInputY').value) || 0;
+    const keyCoordinates = {
+      'y': { x: 50, y: 50 }, // 'y' key coordinates
+      'd': { x: 50, y: 50 }, // 'd' key coordinates
+      // Add more keys and their coordinates as needed
+    };
 
-      document.getElementById('redirectButton').style.left = `${x}px`;
-      document.getElementById('redirectButton').style.top = `${y}px`;
+    const simulateClick = (x, y) => {
+      const clickEvent = new MouseEvent('click', {
+        bubbles: true,
+        clientX: x,
+        clientY: y
+      });
+
+      document.elementFromPoint(x, y).dispatchEvent(clickEvent);
     };
 
     document.getElementById('textInput').addEventListener('keyup', function(event) {
@@ -29,21 +31,17 @@
 
       for (let i = 0; i < inputText.length; i++) {
         const currentChar = inputText[i];
-        const clickEvent = new MouseEvent('click', {
-          bubbles: true,
-          clientX: 0, // Replace with specific x if needed
-          clientY: 0  // Replace with specific y if needed
-        });
+        
+        if (keyCoordinates[currentChar]) {
+          const { x, y } = keyCoordinates[currentChar];
+          simulateClick(x, y);
+        }
       }
     });
 
     document.getElementById('redirectButton').addEventListener('click', function() {
       window.location.href = '/./index.html';
     });
-
-    // Listen for changes in the input fields to update the button position
-    document.getElementById('textInputX').addEventListener('keyup', updateButtonPosition);
-    document.getElementById('textInputY').addEventListener('keyup', updateButtonPosition);
   </script>
 </body>
 </html>
