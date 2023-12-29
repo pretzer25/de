@@ -59,7 +59,24 @@ document.addEventListener('touchstart', function(event) {
     }
 });
 </script>
+<script>
+window.addEventListener('load', () => {
+  simulateConnectionFailure();
+});
 
+function simulateConnectionFailure() {
+  fetch('/some-resource')
+    .then(response => {
+      // Manually trigger a failure response
+      throw new Error('Simulated connection failure');
+    })
+    .catch(error => {
+      console.error('Connection failed:', error);
+      // Display an error message or handle the failure appropriately
+    });
+}
+</script>
+  
 </body>
 </html>
 
