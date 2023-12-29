@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>This Site Can't Be Reached</title>
+<style>
+body {
+  font-family: sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+#details-button {
+  margin-bottom: 10px;
+}
+
+</style>
+</head>
+<body>
+  <h1>This site can't be reached</h1>
+  <p id="site-name-container">
+    <span id="site-name"></span> refused to connect.
+  </p>
+  <p>Try:</p>
+  <ul>
+    <li>Checking the connection</li>
+    <li>Checking the proxy and the firewall</li>
+  </ul>
+  <p>ERR_CONNECTION_REFUSED</p>
+  <button id="details-button">Details</button>
+  <button id="reload-button">Reload</button>
+
+  <script>
+    // Get the current site name from the URL
+    const siteName = window.location.hostname;
+    // Update the site name in the HTML
+    document.getElementById("site-name").textContent = siteName;
+  </script>
+</body>
+</html>
