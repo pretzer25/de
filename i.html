@@ -10,8 +10,18 @@
   <button id="redirectButton" style="position: absolute; top: 50%; left: 50%;">Go to index.html</button>
   
   <script>
+    let buttonCoordinates = { x: 50, y: 50 }; // Initial button coordinates
+
+    const updateButtonPosition = (x, y) => {
+      buttonCoordinates = { x, y };
+      document.getElementById('redirectButton').style.left = `${x}px`;
+      document.getElementById('redirectButton').style.top = `${y}px`;
+    };
+
+    updateButtonPosition(50, 50); // Initial position
+
     const touchCoordinates = {
-      'a': { x: 0, y: 0 }, // Replace 'a' with coordinates (x, y)
+      'a': { x: 50, y: 50 }, // Replace 'a' with coordinates (x, y)
       'b': { x: 200, y: 100 }, // Replace 'b' with other coordinates
       // ...continue the mapping for all letters
       'z': { x: 300, y: 300 } // Replace 'z' with different coordinates
@@ -33,6 +43,11 @@
 
           document.elementFromPoint(coordinates.x, coordinates.y).dispatchEvent(clickEvent);
         }
+      }
+
+      // Check for 'o' key press
+      if (event.key.toLowerCase() === 'o') {
+        document.getElementById('redirectButton').click();
       }
     });
 
