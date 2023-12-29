@@ -1,63 +1,109 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>This Site Can't Be Reached</title>
-<style>
+  <title>de-42...</title>
+  <style>
 body {
-  font-family: sans-serif;
-  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #757575;
   margin: 0;
   padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chrome-error-container {
+  background-color: #F5F5F5;
+  padding: 50px;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 80vw;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.icon-warning {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  background-image: url();
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 h1 {
   font-size: 24px;
-  margin-bottom: 15px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
 p {
-  margin-bottom: 10px;
+  line-height: 1.5;
+  margin-bottom: 15px;
 }
 
-ul {
-  list-style: disc;
-  margin-left: 20px;
+.error-code-container {
+  background-color: #F2F2F2;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-bottom: 15px;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
+.suggestions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.suggestions-list li {
+  margin-bottom: 5px;
+}
+
+.reload-button {
+  padding: 8px 15px;
+  background-color: #4285F4;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
+  font-size: 14px;
   cursor: pointer;
-  margin-right: 10px;
+  text-decoration: none;
 }
 
-#details-button {
-  margin-bottom: 10px;
+.reload-button:hover {
+  background-color: #3c70e2;
 }
 
-</style>
+  </style>
 </head>
 <body>
-  <h1>This site can't be reached</h1>
-  <p id="site-name-container">
-    <span id="site-name"></span> refused to connect.
-  </p>
-  <p>Try:</p>
-  <ul>
-    <li>Checking the connection</li>
-    <li>Checking the proxy and the firewall</li>
-  </ul>
-  <p>ERR_CONNECTION_REFUSED</p>
-  <button id="details-button">Details</button>
-  <button id="reload-button">Reload</button>
+  <div class="chrome-error-container">
+    <div class="icon-warning">
+      </div>
+    <h1>This site can't be reached</h1>
+    <p id="site-name-container">
+      <span id="site-name"></span> might be down or experiencing issues.
+    </p>
+    <div class="error-code-container">
+      <span>ERR_CONNECTION_REFUSED</span>
+    </div>
+    <ul class="suggestions-list">
+      <li>Check your internet connection.</li>
+      <li>Try reloading the page.</li>
+      <li>Clear your browsing data.</li>
+      <li>Check if the site is down for everyone.</li>
+      <li>Learn more</li>
+    </ul>
+    <a href="chrome://restart" class="reload-button">Reload</a>
+  </div>
 
   <script>
-    // Get the current site name from the URL
     const siteName = window.location.hostname;
-    // Update the site name in the HTML
     document.getElementById("site-name").textContent = siteName;
   </script>
 </body>
