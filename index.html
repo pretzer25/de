@@ -29,21 +29,17 @@ document.addEventListener("keydown", function(event) {
 </script>
 
 <script>
-window.addEventListener('load', () => {
-  simulateConnectionFailure();
-});
-
-function simulateConnectionFailure() {
-  fetch('/some-resource')
+  window.addEventListener('load', () => {
+  // Simulate a failed fetch for the current HTML file
+  fetch(window.location.href)
     .then(response => {
-      // Manually trigger a failure response
-      throw new Error('Simulated connection failure');
+      throw new Error('Simulated connection failure for index.html');
     })
     .catch(error => {
       console.error('Connection failed:', error);
-      // Display an error message or handle the failure appropriately
+      // Handle the simulated failure here (e.g., display an error message)
     });
-}
+});
 </script>
   
 </body>
