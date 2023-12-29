@@ -5,9 +5,10 @@
 <style>
 body {
   background-image: url("/./error.png");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  touch-action: none; /* CSS attempt to disable touchpad zoom */
 }
 
 .overlay {
@@ -21,6 +22,7 @@ body {
 
 img {
   object-fit: contain;
+  touch-action: none; /* CSS attempt to disable touchpad zoom */
 }
 </style>
 </head>
@@ -50,10 +52,10 @@ document.addEventListener("keydown", function(event) {
 
 </script>
 
-  <script>
+<script>
 document.addEventListener('touchstart', function(event) {
     if (event.touches.length > 1) {
-        event.preventDefault();
+        event.preventDefault(); /* JavaScript prevention for multi-touch events */
     }
 });
 </script>
