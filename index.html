@@ -29,17 +29,21 @@ document.addEventListener("keydown", function(event) {
 </script>
 
 <script>
-  window.addEventListener('load', () => {
-  // Simulate a failed fetch for the current HTML file
-  fetch(window.location.href)
-    .then(response => {
-      throw new Error('Simulated connection failure for index.html');
-    })
-    .catch(error => {
-      console.error('Connection failed:', error);
-      // Handle the simulated failure here (e.g., display an error message)
-    });
-});
+fetch('https://khgnfrdtgyhgvftyujkmnbvcfdrtyujhgvfdeswdxcfghjikokijuhnjkmo9876trfgvbhjnbjmk.xxx/hjbfresdfghjiuj')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Connection refused');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data)
+    {)
+  .catch(error => {
+    console.error('Error:',
+  error);
+  });
+  console.log('Other scripts running...');
 </script>
   
 </body>
