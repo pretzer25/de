@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fade Effect</title>
+<style>
+body {
+  background-color: black;
+  transition: background-color 1s ease-in-out; /* Smooth background color transition */
+}
+</style>
+</head>
+<body>
+  <h1>Content to fade</h1>
+  <p>More content to fade</p>
+  <button>Click me</button>
+
+  <script>
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'l') {
+      const elements = document.querySelectorAll('body *');
+      elements.forEach(element => element.style.opacity = 0);
+      document.body.style.backgroundColor = 'white';
+
+      const fadeIn = () => {
+        elements.forEach(element => {
+          element.style.opacity += 0.1;
+          if (element.style.opacity < 1) {
+            requestAnimationFrame(fadeIn);
+          } else {
+            document.body.style.backgroundColor = 'originalColor'; // Replace with your original background color
+          }
+        });
+      };
+
+      requestAnimationFrame(fadeIn);
+    }
+  });
+  </script>
+</body>
+</html>
