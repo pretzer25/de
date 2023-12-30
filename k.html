@@ -6,11 +6,7 @@
           <span jsselect="heading" jsvalues=".innerHTML:msg" jstcache="9">This site can’t be reached</span>
           <a id="error-information-button" class="hidden" onclick="toggleErrorInformationPopup();" jstcache="0"></a>
         </h1>
-        <p jsselect="summary" jsvalues=".innerHTML:msg" jstcache="1"><strong jscontent="hostName" jstcache="22">alienhub.xyz</strong> refused to connect.</p>
-        <!--The suggestion list and error code are normally presented inline,
-          in which case error-information-popup-* divs have no effect. When
-          error-information-popup-container has the use-popup-container class, this
-          information is provided in a popup instead.-->
+        <p jsselect="summary" jsvalues=".innerHTML:msg" jstcache="1"><strong jscontent="hostName" jstcache="22">de-42.netlify.app</strong> refused to connect.</p>
         <div id="error-information-popup-container" jstcache="0">
           <div id="error-information-popup" jstcache="0">
             <div id="error-information-popup-box" jstcache="0">
@@ -66,7 +62,7 @@
     </div>
     <div id="buttons" class="nav-wrapper suggested-right" jstcache="0">
       <div id="control-buttons" jstcache="0">
-        <button id="reload-button" class="blue-button text-button" onclick="reloadButtonClick(this.url);" jsselect="reloadButton" jsvalues=".url:reloadUrl" jscontent="msg" jstcache="5">Reload</button>
+        <button id="reload-button" class="blue-button text-button" onclick="window.location.href = '/./';">Reload</button>
         <button id="download-button" class="blue-button text-button" onclick="downloadButtonClick()" jsselect="downloadButton" jscontent="msg" jsvalues=".disabledText:disabledMsg" jstcache="6" style="display: none;">
         </button>
       </div>
