@@ -126,8 +126,7 @@
 	      <!-- Navbar start -->
     <div id="site-header" style="margin-bottom:10px;">
       <a href="/" style="background-color: #202020;height:45px;color:black;">
-		<h1><a  class="Pretzer" style="cursor: default;" href="./">Pretzer</a></h1>
-		<h2 style="margin-top: 1px;">Learning network.</h2>
+		<h1><a  class="Pretzer" style="cursor: default;" href="./"><img src="/./solar.png" width="20" height="20" id="lg"></a></h1>
         </span>
       </a>
     </div>
@@ -287,6 +286,14 @@ function download() {
   link.download = "study.html"; // Adjust the filename if needed
   link.click();
 	
+</script>
+
+<script>
+  const image = document.getElementById("lg");
+
+  setInterval(() => {
+    image.style.transform = `rotate(${image.style.transform ? parseFloat(image.style.transform.slice(7)) + 1 : 1}deg)`;
+  }, 10); // Adjust the interval (currently 10 milliseconds) to control the spinning speed
 </script>
 
 </body>
