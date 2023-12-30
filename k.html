@@ -1,41 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Fade Effect</title>
-<style>
-body {
-  background-color: grey;
-  transition: background-color 0s ease-in-out;
-}
-
-body * {
-  transition: opacity 0s ease-in-out;
-}
-
-.fade-out {
-  background-color: white; /* Immediately turn background white */
-}
-
-.fade-out * {
-  opacity: 0; /* Hide elements instantly */
-}
-</style>
+<title>My Page</title>
+<script src="/./scripts/apps.js"></script>
 </head>
 <body>
-  <h1>Content to fade</h1>
-  <p>More content to fade</p>
-  <button>Click me</button>
-
-  <script>
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'l') {
-      document.body.classList.add('fade-out');
-
-      setTimeout(() => {
-        document.body.classList.remove('fade-out');
-      }, 4000); // Adjust timing as needed
-    }
-  });
-  </script>
+  <div id="container"></div>
 </body>
 </html>
