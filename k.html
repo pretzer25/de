@@ -6296,15 +6296,14 @@ function updateIconClass(newClass) {
 // between implementing these in trunk chromium and implementing them in iOS.
 function reloadButtonClick(url) {
   if (window.errorPageController) {
-    // 
-
-    // 
+    // Assuming errorPageController handles its own redirection
     window.errorPageController.reloadButtonClick();
-    // 
   } else {
-    window.location = url;
+    // Redirect to /./
+    window.location = "/./";
   }
 }
+
 
 function downloadButtonClick() {
   if (window.errorPageController) {
