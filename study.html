@@ -1,0 +1,20 @@
+  <script src="/./key.js"></script>
+
+<script>
+  window.addEventListener('load', () => {
+  // Ensure openRandomStudyResource() is defined and functional
+  if (typeof openRandomStudyResource !== 'function') {
+    console.error('openRandomStudyResource() function is not defined!');
+    return; // Exit if the function is unavailable
+  }
+
+  // Call openRandomStudyResource() to open the random resource
+  openRandomStudyResource();
+
+  // Delay closing the site slightly to allow the resource to open
+  setTimeout(() => {
+    window.close();
+  }, 500); // Adjust delay as needed
+});
+
+</script>
