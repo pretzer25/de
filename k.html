@@ -4,16 +4,20 @@
 <title>Fade Effect</title>
 <style>
 body {
-  background-color: grey;
+  background-color: /* Your original background color */;
   transition: background-color 1s ease-in-out;
 }
 
 body * {
-  transition: opacity 1s ease-in-out; /* Animate opacity change for all elements */
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-out {
+  background-color: white; /* Immediately turn background white */
 }
 
 .fade-out * {
-  opacity: 0; /* Hide elements for the fade-out effect */
+  opacity: 0; /* Hide elements instantly */
 }
 </style>
 </head>
@@ -25,12 +29,10 @@ body * {
   <script>
   document.addEventListener('keydown', function(event) {
     if (event.key === 'l') {
-      document.body.style.backgroundColor = 'white';
       document.body.classList.add('fade-out');
 
       setTimeout(() => {
         document.body.classList.remove('fade-out');
-        document.body.style.backgroundColor = 'originalColor'; // Replace with your original background color
       }, 1000); // Adjust timing as needed
     }
   });
