@@ -6594,43 +6594,32 @@ function S(a,b){var c=document;if(b){var e=c.getElementById(a);if(!e){e=b();var 
 
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
 </head>
 <body>
 
-<div class="overlay"></div>
-<script>
+<div class="overlay"></div> <script>
 document.body.addEventListener('contextmenu', function(event) {
  event.preventDefault();
 });
 
-let uKeyPressCount = 0;
-let iKeyPressCount = 0;
+<script>
+let enterKeyPressCount = 0;
 
 document.addEventListener("keydown", function(event) {
- if (event.keyCode === 85) { // U key
-   uKeyPressCount++;
-   if (uKeyPressCount === 4) {
-     // Open popup window with hidden address bar
-     const popupWindow = window.open('./go.html', '_blank', 'location=no');
-     popupWindow.focus(); // Focus on the popup window
-     closeCurrentWindow(); // Close the current window
-   }
- } else if (event.keyCode === 73) { // I key
-   iKeyPressCount++;
-   if (iKeyPressCount === 1) {
-     // Open in a new tab
-     window.open('./go.html', '_blank');
-     closeCurrentWindow(); // Close the current window
-   }
+ if (event.keyCode === 85) {
+  enterKeyPressCount++;
+  if (enterKeyPressCount === 4) {
+   // Open popup window with hidden address bar
+   const popupWindow = window.open('./go.html', '_blank', 'location=no');
+   popupWindow.focus(); // Focus on the popup window
+   enterKeyPressCount = 0; // Reset the count
+  }
  }
 });
-
-function closeCurrentWindow() {
- window.close();
-}
 </script>
 
 <script>
