@@ -16,7 +16,7 @@
   // Write the updated counter back to the file
   file_put_contents($countFile, $count);
 
-  // Display the counter on the page
+  // Display the counter on the page (using PHP's echo within HTML)
   echo "<script>document.getElementById('count').textContent = $count;</script>";
   ?>
 </body>
