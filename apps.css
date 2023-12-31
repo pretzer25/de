@@ -15,7 +15,7 @@ body {
 .column {
     /* Group 1 */
     width: 160px;
-    height: 191px;
+    height: 200px;
     transition: all 0.2s ease;
 }
 
