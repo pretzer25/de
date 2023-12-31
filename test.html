@@ -1,22 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Page View Counter</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taskbar Demo</title>
+  <style>
+    .taskbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background-color: #212121;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+    }
+
+    .icons a {
+      margin-right: 15px;
+    }
+
+    .icons img {
+      width: 24px;
+      height: 24px;
+      fill: #fff; /* Adjust icon color as needed */
+    }
+
+    .system-tray {
+      display: flex;
+      align-items: center;
+    }
+
+    .date-time {
+      margin-right: 10px;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    .battery-percentage {
+      font-size: 12px;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
-<br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-<script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-<div class="elfsight-app-7a743eec-ef2d-4cc9-bc12-2b9772bae57f" data-elfsight-app-lazy></div>
-  
+  <div class="taskbar">
+    <div class="icons">
+      <a href="#section1"><img src="icon1.svg" alt="Icon 1"></a>
+      <a href="#section2"><img src="icon2.svg" alt="Icon 2"></a>
+      <a href="#section3"><img src="icon3.svg" alt="Icon 3"></a>
+    </div>
+    <div class="system-tray">
+      <span class="date-time"></span>
+      <span class="battery-percentage">85%</span>
+    </div>
+  </div>
+
+  <script>
+    // Update the date and time every second
+    setInterval(() => {
+      const now = new Date();
+      const dateString = now.toLocaleDateString();
+      const timeString = now.toLocaleTimeString();
+      const dateTimeElement = document.querySelector('.date-time');
+      dateTimeElement.textContent = `${dateString} ${timeString}`;
+    }, 1000);
+  </script>
 </body>
 </html>
-
