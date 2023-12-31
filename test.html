@@ -53,7 +53,15 @@
 </head>
 <body>
   <div class="taskbar">
+    <div class="icons">
+      <a href="/./go.html"><img src="/./solar.png"></a>
+      <a href="/./"><img src="icon2.svg"></a>
+      <a href="/./"><img src="icon3.svg"></a>
     </div>
+    <div class="system-tray">
+      <span class="date-time"></span>
+      <span class="battery-percentage">‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ </span> </div>
+  </div>
 
   <script>
     // Update the date and time every second
@@ -64,19 +72,6 @@
       const dateTimeElement = document.querySelector('.date-time');
       dateTimeElement.textContent = `${dateString} ${timeString}`;
     }, 1000);
-
-    // Update battery percentage every 5 seconds
-    setInterval(() => {
-      if (navigator.getBattery) {
-        navigator.getBattery().then(battery => {
-          const batteryPercentageElement = document.querySelector('.battery-percentage');
-          batteryPercentageElement.textContent = `${battery.level * 100}%`;
-        });
-      } else {
-        // Handle browsers that don't support the Battery API
-        console.warn('Battery API not supported');
-      }
-    }, 5000);
   </script>
 </body>
 </html>
