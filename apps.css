@@ -9,12 +9,12 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2.2em;
+    gap: 1.9em;
 }
 
 .column {
     /* Group 1 */
-    width: 190px;
+    width: 160px;
     height: 191px;
     transition: all 0.2s ease;
 }
@@ -22,8 +22,8 @@ body {
 .column img {
     /* Rectangle 1 */
     position: absolute;
-    width: 170px;
-    height: 170px;
+    width: 160px;
+    height: 160px;
     background: #F8F8F8;
     border-radius: 25px;
     transition: all 0.2s ease;
@@ -32,7 +32,7 @@ body {
 .column p {
     /* Label */
     position: absolute;
-    width: 190px;
+    width: 160px;
     height: 23px;
     font-style: normal;
     font-weight: 550;
