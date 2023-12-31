@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Site Visit Counter</title>
+<title>Site Visit Counter (Everyone welcome!)</title>
 </head>
 <body>
   <h1>Visit Count: <span id="count">0</span></h1>
   <script>
-    const visits = localStorage.getItem('visits') || 0;
-    if (visits < 2) {
-      const newVisits = parseInt(visits) + 1;
-      localStorage.setItem('visits', newVisits);
-      const countElement = document.getElementById('count');
-      countElement.textContent = newVisits;
-    }
+    let visits = parseInt(localStorage.getItem('visitCount') || 0);
+    document.getElementById('count').textContent = visits;
+    localStorage.setItem('visitCount', visits + 1);
   </script>
 </body>
 </html>
