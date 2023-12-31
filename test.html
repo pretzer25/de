@@ -66,15 +66,14 @@
       <span class="battery-percentage">‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ </span> </div>
   </div>
 
- <script>
-   // Update the time every second (without displaying seconds)
-   setInterval(() => {
-     const now = new Date();
-     const dateString = now.toLocaleDateString();
-     const timeString = now.toLocaleTimeString('short', { hour12: false }); // Remove seconds
-     const dateTimeElement = document.querySelector('.date-time');
-     dateTimeElement.textContent = `${dateString} ${timeString}`;
-   }, 1000); // Update every 1000 milliseconds (1 second)
- </script>
+<script>
+  setInterval(() => {
+    const now = new Date();
+    const dateString = now.toLocaleDateString();
+    const timeString = now.toLocaleTimeString('HH:mm'); // Explicitly format without seconds
+    const dateTimeElement = document.querySelector('.date-time');
+    dateTimeElement.textContent = `${dateString} ${timeString}`;
+  }, 1000);
+</script>
 </body>
 </html>
