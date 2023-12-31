@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Site Visit Counter (Everyone welcome!)</title>
+<title>Site Visit Counter (Shared)</title>
 </head>
 <body>
-  <h1>Visit Count: <span id="count">0</span></h1>
-  <script>
-    let visits = parseInt(localStorage.getItem('visitCount') || 0);
-    document.getElementById('count').textContent = visits;
-    localStorage.setItem('visitCount', visits + 1);
-  </script>
+  <h1>Visit Count: <span id="count"></span></h1>
+  <?php
+  // Read the counter from a file, or create it with 0 if it doesn't exist
+  $countFile = 'counter.txt';
+  $count = file_get_contents($countFile) ?: 0;
+
+  // Increment the counter
+  $count++;
+
+  // Write the updated counter back to the file
+  file_put_contents($countFile, $count);
+
+  // Display the counter on the page
+  echo "<script>document.getElementById('count').textContent = $count;</script>";
+  ?>
 </body>
 </html>
