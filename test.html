@@ -21,11 +21,11 @@
     .icons {
       display: flex;
       align-items: center;
-      justify-content: center; /* Center icons horizontally */
+      justify-content: space-evenly; /* Adjusted centering method */
     }
 
     .icons a {
-      margin-right: 15px;
+      margin: 0 15px; /* Removed individual left margin for each icon */
     }
 
     .icons img {
@@ -48,7 +48,6 @@
     .battery-percentage {
       font-size: 12px;
       color: #fff;
-      margin-left: -5px; /* Shift battery percentage slightly to the left */
     }
   </style>
 </head>
@@ -61,7 +60,7 @@
     </div>
     <div class="system-tray">
       <span class="date-time"></span>
-      <span class="battery-percentage">42%</span> </div>
+      <span class="battery-percentage">REPLACE_WITH_ACTUAL_VALUE</span> </div>
   </div>
 
   <script>
