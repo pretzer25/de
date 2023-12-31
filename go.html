@@ -17,6 +17,15 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"/>
  	
   <!-- JS -->
+  <script>
+    fetch('./nav.html')
+      .then(response => response.text())
+      .then(htmlContent => {
+        const kContent = document.createElement('div');
+        kContent.innerHTML = htmlContent;
+        document.body.appendChild(kContent);
+      });
+  </script>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <script src="/./key.js"></script>
