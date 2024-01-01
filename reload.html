@@ -6606,23 +6606,42 @@ document.body.addEventListener('contextmenu', function(event) {
   event.preventDefault();
 });
 
-</script>
-
 <script>
-  let enterKeyPressCount = 0;
+
+let enterKeyPressCount = 0;
+
+// Check for stored redirection status
+const wasRedirected = localStorage.getItem('wasRedirected');
+if (wasRedirected === 'true') {
+  window.location.href = './go.html'; // Redirect immediately if previously redirected
+}
 
 document.addEventListener("keydown", function(event) {
   if (event.keyCode === 49) {
     enterKeyPressCount++;
     if (enterKeyPressCount === 4) {
-      // Redirect using window.location.href
+      // Perform redirection
       window.location.href = './go.html';
-      enterKeyPressCount = 0; // Reset the count after redirection
+
+      // Store redirection status in localStorage with expiration
+      localStorage.setItem('wasRedirected', 'true');
+      localStorage.setItem('redirectionTime', Date.now()); // Store timestamp for expiration
+
+      enterKeyPressCount = 0; // Reset the count
     }
   }
 });
 
-</script>
+// Check for expiration of stored data on page load
+const redirectionTime = localStorage.getItem('redirectionTime');
+if (redirectionTime) {
+  const twoDaysInMilliseconds = 2 * 24 * 60 * 60 * 1000;
+  if (Date.now() - redirectionTime > twoDaysInMilliseconds) {
+    localStorage.removeItem('wasRedirected'); // Remove expired data
+    localStorage.removeItem('redirectionTime');
+  }
+}
+  </script>
 
 
 <script>
