@@ -12,12 +12,12 @@
     font-weight: bold;
   }
 
-  #input-container {
+  #id-input {
     text-align: center;
   }
 
   #saved-id,
-  #fill-button {
+  #fill-bttn {
     margin-top: 10px; /* Space below the textbox */
   }
 </style>
@@ -27,7 +27,7 @@
   <button onclick="redirect()">Go</button>
   <br>
   <p id="saved-id"></p>
-  <button onclick="fillTextbox()">Fill</button>
+  <button id="fill-bttn" onclick="fillTextbox()">Fill</button>
   
   <script>
     // Retrieve saved ID if any
