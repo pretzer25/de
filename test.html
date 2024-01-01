@@ -12,7 +12,7 @@
 <body>
   <script>
     window.onload = function() {
-  alert("Welcome! Please follow these instructions to proceed: 1.be kind 2.dont be kind 3.this is a test 4.lol did you believe that");
+  alert("Welcome! Please follow these instructions: 1.fill in the password sharkie4life, do not press the go button 2.get Session ID 3.paste it below 4.click the go button at the bottom of the page, not the green big one.");
 };
 
   </script>
@@ -32,13 +32,22 @@
       document.getElementById("saved-id").textContent = "Previous ID: " + savedId;
     }
 
-    function redirect() {
-      const id = document.getElementById("id-input").value;
-      localStorage.setItem("lastId", id); // Save the ID
+function redirect() {
+  const id = document.getElementById("id-input").value;
+  localStorage.setItem("lastId", id); // Save the ID
 
-      const url = `https://demo-opensource.rammerhead.org/${id}/https://now.gg/apps/epic-games/7308/fortnite.html`;
-      window.location.href = url;
-    }
+  const url = `https://demo-opensource.rammerhead.org/${id}/https://now.gg/apps/epic-games/7308/fortnite.html`;
+
+  // Create the iframe element
+  const iframe = document.createElement("iframe");
+  iframe.src = url;
+  iframe.style.width = "100%";
+  iframe.style.height = "100%"; // Adjust height as needed
+
+  // Add the iframe to the current page
+  document.body.appendChild(iframe);
+}
+
 
       function fillTextbox() {
       const savedId = localStorage.getItem("lastId");
