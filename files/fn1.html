@@ -13,6 +13,22 @@
         background: lightyellow; /* Just for styling */
     }
 </style>
+        <script>fetch('/./nav.html')
+  .then(response => response.text())
+  .then(htmlContent => {
+    const kContent = document.createElement('div');
+    kContent.innerHTML = htmlContent;
+    document.body.appendChild(kContent);
+
+    // Execute scripts within the fetched content
+    const scripts = kContent.querySelectorAll('script');
+    scripts.forEach(script => {
+      const newScript = document.createElement('script');
+      newScript.textContent = script.textContent;
+      document.head.appendChild(newScript);
+    });
+  });
+</script>
 </head>
 <body>
     <iframe src="https://wellsousaaa.github.io/Five-Nights-at-Freddys-Web/"></iframe>
