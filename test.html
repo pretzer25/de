@@ -1,60 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Volume Notificatio</title>
-<style>
-#notification-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-}
-
-#notification {
-  padding: 10px 20px;
-  background-color: #333;
-  color: #fff;
-  border-radius: 5px;
-  text-align: center;
-  font-weight: bold;
-  display: none;
-}
-
-#close-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  cursor: pointer;
-}
-</style>
+<title>Redirect Example</title>
 </head>
 <body>
-  <div id="notification-container">
-    <div id="notification">
-      Your volume is high!
-      <span id="close-button">x</span>
-    </div>
-  </div>
+  <input type="text" id="id-input" placeholder="Enter Session ID here">
+  <button onclick="redirect()">Go</button>
+
   <script>
-function checkVolume() {
-  const audio = new Audio();
-  audio.volume = 3;
-  if (audio.volume > 2) {
-    const notification = document.getElementById("notification");
-    notification.style.display = "block";
-  }
-}
-
-function closeNotification() {
-  const notification = document.getElementById("notification");
-  notification.style.display = "none";
-}
-
-checkVolume();
-setInterval(checkVolume, 5000);
-
-const closeButton = document.getElementById("close-button");
-closeButton.addEventListener("click", closeNotification);
+    function redirect() {
+      const id = document.getElementById("id-input").value;
+      const url = `https://demo-opensource.rammerhead.org/${id}/https://now.gg/apps/epic-games/7308/fortnite.html`;
+      window.location.href = url;
+    }
   </script>
 </body>
 </html>
