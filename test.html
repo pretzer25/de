@@ -32,21 +32,13 @@
       document.getElementById("saved-id").textContent = "Previous ID: " + savedId;
     }
 
-function redirect() {
-  const id = document.getElementById("id-input").value;
-  localStorage.setItem("lastId", id); // Save the ID
+    function redirect() {
+   const id = document.getElementById("id-input").value;
+   localStorage.setItem("lastId", id); // Save the ID
 
-  const url = `https://demo-opensource.rammerhead.org/${id}/https://now.gg/apps/epic-games/7308/fortnite.html`;
-
-  // Create the iframe element
-  const iframe = document.createElement("iframe");
-  iframe.src = url;
-  iframe.style.width = "100%";
-  iframe.style.height = "100%"; // Adjust height as needed
-
-  // Add the iframe to the current page
-  document.body.appendChild(iframe);
-}
+   const url = `https://example.org/${id}/https://example.com/`;
+   window.location.href = url;
+  }
 
 
       function fillTextbox() {
