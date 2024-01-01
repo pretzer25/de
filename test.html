@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Redirect Example</title>
+<title>Study</title>
+  <style>
+  body {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margins */
+    font-family: 'Impact', sans-serif; /* Impact font with fallback */
+    font-weight: bold; /* Bold font weight */
+  }
+</style>
 </head>
 <body>
   <input type="text" id="id-input" placeholder="Enter Session ID here">
   <button onclick="redirect()">Go</button>
   <p id="saved-id"></p>
-
+  <button onclick="fillTextbox()">Fill</button>
+  
   <script>
     // Retrieve saved ID if any
     const savedId = localStorage.getItem("lastId");
@@ -21,6 +33,13 @@
 
       const url = `https://demo-opensource.rammerhead.org/${id}/https://now.gg/apps/epic-games/7308/fortnite.html`;
       window.location.href = url;
+    }
+
+      function fillTextbox() {
+      const savedId = localStorage.getItem("lastId");
+      if (savedId) {
+        document.getElementById("id-input").value = savedId;
+      }
     }
   </script>
 </body>
