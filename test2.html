@@ -1,328 +1,8 @@
 <html><head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="https://demo-opensource.rammerhead.org//favicon.png">
     <link rel="stylesheet" href="https://demo-opensource.rammerhead.org/style.css">
-    <script> (function () {
-    const mod = (n, m) => ((n % m) + m) % m;
-    const baseDictionary = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~-';
-    const shuffledIndicator = '_rhs';
-    const generateDictionary = function () {
-        let str = '';
-        const split = baseDictionary.split('');
-        while (split.length > 0) {
-            str += split.splice(Math.floor(Math.random() * split.length), 1)[0];
-        }
-        return str;
-    };
-    class StrShuffler {
-        constructor(dictionary = generateDictionary()) {
-            this.dictionary = dictionary;
-        }
-        shuffle(str) {
-            if (str.startsWith(shuffledIndicator)) {
-                return str;
-            }
-            let shuffledStr = '';
-            for (let i = 0; i < str.length; i++) {
-                const char = str.charAt(i);
-                const idx = baseDictionary.indexOf(char);
-                if (char === '%' && str.length - i >= 3) {
-                    shuffledStr += char;
-                    shuffledStr += str.charAt(++i);
-                    shuffledStr += str.charAt(++i);
-                } else if (idx === -1) {
-                    shuffledStr += char;
-                } else {
-                    shuffledStr += this.dictionary.charAt(mod(idx + i, baseDictionary.length));
-                }
-            }
-            return shuffledIndicator + shuffledStr;
-        }
-        unshuffle(str) {
-            if (!str.startsWith(shuffledIndicator)) {
-                return str;
-            }
-
-            str = str.slice(shuffledIndicator.length);
-
-            let unshuffledStr = '';
-            for (let i = 0; i < str.length; i++) {
-                const char = str.charAt(i);
-                const idx = this.dictionary.indexOf(char);
-                if (char === '%' && str.length - i >= 3) {
-                    unshuffledStr += char;
-                    unshuffledStr += str.charAt(++i);
-                    unshuffledStr += str.charAt(++i);
-                } else if (idx === -1) {
-                    unshuffledStr += char;
-                } else {
-                    unshuffledStr += baseDictionary.charAt(mod(idx - i, baseDictionary.length));
-                }
-            }
-            return unshuffledStr;
-        }
-    }
-
-    function setError(err) {
-        var element = document.getElementById('error-text');
-        if (err) {
-            element.style.display = 'block';
-            element.textContent = 'An error occurred: ' + err;
-        } else {
-            element.style.display = 'none';
-            element.textContent = '';
-        }
-    }
-    function getPassword() {
-        var element = document.getElementById('session-password');
-        return element ? element.value : '';
-    }
-    function get(url, callback, shush = false) {
-        var pwd = getPassword();
-        if (pwd) {
-            // really cheap way of adding a query parameter
-            if (url.includes('?')) {
-                url += '&pwd=' + pwd;
-            } else {
-                url += '?pwd=' + pwd;
-            }
-        }
-
-        var request = new XMLHttpRequest();
-        request.open('GET', url, true);
-        request.send();
-
-        request.onerror = function () {
-            if (!shush) setError('Cannot communicate with the server');
-        };
-        request.onload = function () {
-            if (request.status === 200) {
-                callback(request.responseText);
-            } else {
-                if (!shush)
-                    setError(
-                        'unexpected server response to not match "200". Server says "' + request.responseText + '"'
-                    );
-            }
-        };
-    }
-
-    var api = {
-        needpassword(callback) {
-            get('/needpassword', value => callback(value === 'true'));
-        },
-        newsession(callback) {
-            get('/newsession', callback);
-        },
-        editsession(id, httpProxy, enableShuffling, callback) {
-            get(
-                '/editsession?id=' +
-                encodeURIComponent(id) +
-                (httpProxy ? '&httpProxy=' + encodeURIComponent(httpProxy) : '') +
-                '&enableShuffling=' + (enableShuffling ? '1' : '0'),
-                function (res) {
-                    if (res !== 'Success') return setError('unexpected response from server. received ' + res);
-                    callback();
-                }
-            );
-        },
-        sessionexists(id, callback) {
-            get('/sessionexists?id=' + encodeURIComponent(id), function (res) {
-                if (res === 'exists') return callback(true);
-                if (res === 'not found') return callback(false);
-                setError('unexpected response from server. received' + res);
-            });
-        },
-        deletesession(id, callback) {
-            api.sessionexists(id, function (exists) {
-                if (exists) {
-                    get('/deletesession?id=' + id, function (res) {
-                        if (res !== 'Success' && res !== 'not found')
-                            return setError('unexpected response from server. received ' + res);
-                        callback();
-                    });
-                } else {
-                    callback();
-                }
-            });
-        },
-        shuffleDict(id, callback) {
-            get('/api/shuffleDict?id=' + encodeURIComponent(id), function (res) {
-                callback(JSON.parse(res));
-            });
-        }
-    };
-
-    var localStorageKey = 'rammerhead_sessionids';
-    var localStorageKeyDefault = 'rammerhead_default_sessionid';
-    var sessionIdsStore = {
-        get() {
-            var rawData = localStorage.getItem(localStorageKey);
-            if (!rawData) return [];
-            try {
-                var data = JSON.parse(rawData);
-                if (!Array.isArray(data)) throw 'getout';
-                return data;
-            } catch (e) {
-                return [];
-            }
-        },
-        set(data) {
-            if (!data || !Array.isArray(data)) throw new TypeError('must be array');
-            localStorage.setItem(localStorageKey, JSON.stringify(data));
-        },
-        getDefault() {
-            var sessionId = localStorage.getItem(localStorageKeyDefault);
-            if (sessionId) {
-                var data = sessionIdsStore.get();
-                data.filter(function (e) {
-                    return e.id === sessionId;
-                });
-                if (data.length) return data[0];
-            }
-            return null;
-        },
-        setDefault(id) {
-            localStorage.setItem(localStorageKeyDefault, id);
-        }
-    };
-
-    function renderSessionTable(data) {
-        var tbody = document.querySelector('tbody');
-        while (tbody.firstChild && !tbody.firstChild.remove());
-        for (var i = 0; i < data.length; i++) {
-            var tr = document.createElement('tr');
-            appendIntoTr(data[i].id);
-            appendIntoTr(data[i].createdOn);
-
-            var fillInBtn = document.createElement('button');
-            fillInBtn.textContent = 'Fill in existing session ID';
-            fillInBtn.className = 'btn btn-outline-primary';
-            fillInBtn.onclick = index(i, function (idx) {
-                setError();
-                sessionIdsStore.setDefault(data[idx].id);
-                loadSettings(data[idx]);
-            });
-            appendIntoTr(fillInBtn);
-
-            var deleteBtn = document.createElement('button');
-            deleteBtn.textContent = 'Delete';
-            deleteBtn.className = 'btn btn-outline-danger';
-            deleteBtn.onclick = index(i, function (idx) {
-                setError();
-                api.deletesession(data[idx].id, function () {
-                    data.splice(idx, 1)[0];
-                    sessionIdsStore.set(data);
-                    renderSessionTable(data);
-                });
-            });
-            appendIntoTr(deleteBtn);
-
-            tbody.appendChild(tr);
-        }
-        function appendIntoTr(stuff) {
-            var td = document.createElement('td');
-            if (typeof stuff === 'object') {
-                td.appendChild(stuff);
-            } else {
-                td.textContent = stuff;
-            }
-            tr.appendChild(td);
-        }
-        function index(i, func) {
-            return func.bind(null, i);
-        }
-    }
-    function loadSettings(session) {
-        document.getElementById('session-id').value = session.id;
-        document.getElementById('session-httpproxy').value = session.httpproxy || '';
-        document.getElementById('session-shuffling').checked = typeof session.enableShuffling === 'boolean' ? session.enableShuffling : true;
-    }
-    function loadSessions() {
-        var sessions = sessionIdsStore.get();
-        var defaultSession = sessionIdsStore.getDefault();
-        if (defaultSession) loadSettings(defaultSession);
-        renderSessionTable(sessions);
-    }
-    function addSession(id) {
-        var data = sessionIdsStore.get();
-        data.unshift({ id: id, createdOn: new Date().toLocaleString() });
-        sessionIdsStore.set(data);
-        renderSessionTable(data);
-    }
-    function editSession(id, httpproxy, enableShuffling) {
-        var data = sessionIdsStore.get();
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].id === id) {
-                data[i].httpproxy = httpproxy;
-                data[i].enableShuffling = enableShuffling;
-                sessionIdsStore.set(data);
-                return;
-            }
-        }
-        throw new TypeError('cannot find ' + id);
-    }
-
-    get('/mainport', function (data) {
-        var defaultPort = window.location.protocol === 'https:' ? 443 : 80;
-        var currentPort = window.location.port || defaultPort;
-        var mainPort = data || defaultPort;
-        if (currentPort != mainPort) window.location.port = mainPort;
-    });
-
-    api.needpassword(doNeed => {
-        if (doNeed) {
-            document.getElementById('password-wrapper').style.display = '';
-        }
-    });
-    window.addEventListener('load', function () {
-        loadSessions();
-
-        var showingAdvancedOptions = false;
-        document.getElementById('session-advanced-toggle').onclick = function () {
-            // eslint-disable-next-line no-cond-assign
-            document.getElementById('session-advanced-container').style.display = (showingAdvancedOptions =
-                !showingAdvancedOptions)
-                ? 'block'
-                : 'none';
-        };
-
-        document.getElementById('session-create-btn').onclick = function () {
-            setError();
-            api.newsession(function (id) {
-                addSession(id);
-                document.getElementById('session-id').value = id;
-                document.getElementById('session-httpproxy').value = '';
-            });
-        };
-        function go() {
-            setError();
-            var id = document.getElementById('session-id').value;
-            var httpproxy = document.getElementById('session-httpproxy').value;
-            var enableShuffling = document.getElementById('session-shuffling').checked;
-            var url = document.getElementById('session-url').value || 'https://www.google.com/';
-            if (!id) return setError('must generate a session id first');
-            api.sessionexists(id, function (value) {
-                if (!value) return setError('session does not exist. try deleting or generating a new session');
-                api.editsession(id, httpproxy, enableShuffling, function () {
-                    editSession(id, httpproxy, enableShuffling);
-                    api.shuffleDict(id, function (shuffleDict) {
-                        if (!shuffleDict) {
-                            window.location.href = '/' + id + '/' + url;
-                        } else {
-                            var shuffler = new StrShuffler(shuffleDict);
-                            window.location.href = '/' + id + '/' + shuffler.shuffle(url);
-                        }
-                    });
-                });
-            });
-        }
-        document.getElementById('session-go').onclick = go;
-        document.getElementById('session-url').onkeydown = function (event) {
-            if (event.key === 'Enter') go();
-        };
-    });
-})(); </script>
+    <script src="https://demo-opensource.rammerhead.org/script.js"></script>
 
     <title>Rammerhead Proxy</title>
 </head>
@@ -333,7 +13,8 @@
         <h1>Rammerhead Proxy</h1>
     </header>
     <div class="container mb-5">
-        
+        <p class="mt-3 mb-3 font-weight">Join the <a href="https://discord.gg/VNT4E7gN5Y">Discord server</a> for updates
+            or just chat about life</p>
         <p class="mb-0 font-weight-bold">Notice: inactive sessions will be deleted after 3 days.</p>
         <p class="mb-3 font-weight-bold">Notice 2: Treat every session id like an isolated incognito browser that
             belongs only to you. DO NOT SHARE THE SESSION ID. All logins that you make with the session id will be saved
@@ -343,15 +24,15 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Enter password</span>
             </div>
-            <input type="password" class="form-control" id="session-password" placeholder="Write sharkie4life in here">
+            <input type="password" class="form-control" id="session-password" placeholder="Password is given by host of this site.">
         </div>
         <div class="input-group mb-2">
             <div class="input-group-prepend">
                 <span class="input-group-text">Enter URL</span>
             </div>
-            <input type="text" class="form-control" id="session-url" placeholder="https://www.google.com/" readonly="">
+            <input type="text" class="form-control" id="session-url" placeholder="https://www.google.com/">
             <div class="input-group-append">
-                <button class="btn btn-success" id="session-go" disabled="">Don't Press</button>
+                <button class="btn btn-success" id="session-go">Go!</button>
             </div>
         </div>
         <div class="input-group mb-4">
@@ -363,7 +44,7 @@
                 <button class="btn btn-secondary" id="session-create-btn" type="button">Create new session ID</button>
             </div>
         </div>
-        <button class="btn btn-outline-secondary" id="session-advanced-toggle" disabled="">Empty</button>
+        <button class="btn btn-outline-secondary" id="session-advanced-toggle">Show advanced options</button>
         <div class="mt-2 mb-4" id="session-advanced-container" style="display: none">
             <div class="form-check mb-1">
                 <input class="form-check-input" type="checkbox" value="" id="session-shuffling" checked="">
@@ -377,7 +58,17 @@
             </div>
         </div>
     </div>
-    
+    <div class="row justify-content-center m-0">
+        <table class="table w-75 table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Session ID</th>
+                    <th>Created on</th>
+                </tr>
+            </thead>
+            <tbody><tr><td>daa8233dbfe748b2ad52e6fbb976d754</td><td>01/01/2024, 13:16:30</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>9c1aa9fb944c4d289c7c9aa60edf5960</td><td>01/01/2024, 13:16:29</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>31fcd139f52245e3b54f4a82230a2b95</td><td>01/01/2024, 13:16:29</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>09da8a1539494328898173185032d715</td><td>01/01/2024, 13:16:28</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>93a55401bba3491ebd9c7f439767ed6c</td><td>01/01/2024, 13:09:47</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>b313d0aaeea344d1b8d0298290aecc4f</td><td>01/01/2024, 13:09:46</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>3b00e8f4cab34d45a3e8779ab268bc09</td><td>01/01/2024, 13:06:44</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>7624970379d74ac4abc44a84aa4a36d9</td><td>01/01/2024, 13:06:44</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>a70b5dfd3c854993855a0d9c34f82b3c</td><td>01/01/2024, 13:06:39</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>49628c06d1a74efeb896843c4f9125c1</td><td>01/01/2024, 13:06:39</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>2567e27fee9e4a93a178d7f6c254287b</td><td>01/01/2024, 13:06:39</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>0f90c7c1ee35495485ab1cc6063e543c</td><td>01/01/2024, 13:06:38</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>9e81610b40c84f45bf80d971b4de7200</td><td>01/01/2024, 13:06:37</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>7bc3f6768f4c4566b9091d8e1af36082</td><td>01/01/2024, 12:35:55</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>1bfebc7c20814b1fbd567d32b6fdaf59</td><td>01/01/2024, 12:30:04</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr><tr><td>f1bc354831ff4ce38e3dbc283fe9ab62</td><td>01/01/2024, 12:26:51</td><td><button class="btn btn-outline-primary">Fill in existing session ID</button></td><td><button class="btn btn-outline-danger">Delete</button></td></tr></tbody>
+        </table>
+    </div>
 
 
 </body></html>
