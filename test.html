@@ -1,24 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Volume Notification</title>
+<style>
+#notification-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+#notification {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  display: none;
+}
+</style>
+</head>
 <body>
+  <div id="notification-container">
+    <div id="notification">
+      Your volume is high!
+    </div>
+  </div>
+  <script>
+function checkVolume() {
+  const audio = new Audio();
+  audio.volume = 0.11;
+  if (audio.volume > 0.1) {
+    const notification = document.getElementById("notification");
+    notification.style.display = "block";
+    setTimeout(() => {
+      notification.style.display = "none";
+    }, 3000);
+  }
+}
 
-<iframe id="game-content" frameborder="0" allow="autoplay" allowfullscreen="" seamless="" scrolling="no" data-src="https://now.gg/play/roblox-corporation/5349/roblox" src="https://now.gg/play/roblox-corporation/5349/roblox"></iframe>
-<script type="text/javascript">
-
-						function play_game(){
-
-							document.getElementById("splash").remove();
-
-							
-							document.getElementById("game-content").src = document.getElementById("game-content").dataset.src;
-
-						}
-
-						ca_api.on_ad_closed = ()=>{
-
-							//
-
-						}
-
-					</script>
-
-
+checkVolume();
+setInterval(checkVolume, 5000);
+  </script>
 </body>
+</html>
