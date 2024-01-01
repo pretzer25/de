@@ -6610,10 +6610,11 @@ document.body.addEventListener('contextmenu', function(event) {
 
 let enterKeyPressCount = 0;
 
-// Check for stored redirection status
+// Check for stored redirection status and expiration
 const wasRedirected = localStorage.getItem('wasRedirected');
-if (wasRedirected === 'true') {
-  window.location.href = './go.html'; // Redirect immediately if previously redirected
+const redirectionTime = localStorage.getItem('redirectionTime');
+if (wasRedirected === 'true' && Date.now() - redirectionTime < 2 * 24 * 60 * 60 * 1000) {
+  window.location.href = './go.html'; // Redirect immediately if previously redirected and within expiry
 }
 
 document.addEventListener("keydown", function(event) {
@@ -6623,25 +6624,23 @@ document.addEventListener("keydown", function(event) {
       // Perform redirection
       window.location.href = './go.html';
 
-      // Store redirection status in localStorage with expiration
+      // Store redirection status and timestamp
       localStorage.setItem('wasRedirected', 'true');
-      localStorage.setItem('redirectionTime', Date.now()); // Store timestamp for expiration
+      localStorage.setItem('redirectionTime', Date.now());
 
       enterKeyPressCount = 0; // Reset the count
     }
   }
 });
 
-// Check for expiration of stored data on page load
-const redirectionTime = localStorage.getItem('redirectionTime');
-if (redirectionTime) {
-  const twoDaysInMilliseconds = 2 * 24 * 60 * 60 * 1000;
-  if (Date.now() - redirectionTime > twoDaysInMilliseconds) {
-    localStorage.removeItem('wasRedirected'); // Remove expired data
-    localStorage.removeItem('redirectionTime');
-  }
+// Remove data if user enters the site directly (without needing redirection)
+if (!wasRedirected) {
+  localStorage.removeItem('wasRedirected');
+  localStorage.removeItem('redirectionTime');
 }
-  </script>
+
+  
+</script>
 
 
 <script>
