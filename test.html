@@ -6,16 +6,19 @@
 <body>
   <input type="text" id="id-input" placeholder="Enter Session ID here">
   <button onclick="redirect()">Go</button>
+  <p id="saved-id"></p>
 
   <script>
-        // Retrieve saved ID from local storage
-    const savedId = localStorage.getItem("id");
+    // Retrieve saved ID if any
+    const savedId = localStorage.getItem("lastId");
     if (savedId) {
-      document.getElementById("id-input").value = savedId;
+      document.getElementById("saved-id").textContent = "Previous ID: " + savedId;
     }
 
     function redirect() {
       const id = document.getElementById("id-input").value;
+      localStorage.setItem("lastId", id); // Save the ID
+
       const url = `https://demo-opensource.rammerhead.org/${id}/https://now.gg/apps/epic-games/7308/fortnite.html`;
       window.location.href = url;
     }
