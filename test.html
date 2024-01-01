@@ -8,6 +8,12 @@
   <button onclick="redirect()">Go</button>
 
   <script>
+        // Retrieve saved ID from local storage
+    const savedId = localStorage.getItem("id");
+    if (savedId) {
+      document.getElementById("id-input").value = savedId;
+    }
+
     function redirect() {
       const id = document.getElementById("id-input").value;
       const url = `https://demo-opensource.rammerhead.org/${id}/https://now.gg/apps/epic-games/7308/fortnite.html`;
