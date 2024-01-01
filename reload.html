@@ -6608,36 +6608,19 @@ document.body.addEventListener('contextmenu', function(event) {
 
 <script>
 
-let enterKeyPressCount = 0;
-
-// Check for stored redirection status and expiration
-const wasRedirected = localStorage.getItem('wasRedirected');
-const redirectionTime = localStorage.getItem('redirectionTime');
-if (wasRedirected === 'true' && Date.now() - redirectionTime < 2 * 24 * 60 * 60 * 1000) {
-  window.location.href = './go.html'; // Redirect immediately if previously redirected and within expiry
-}
+  let enterKeyPressCount = 0;
 
 document.addEventListener("keydown", function(event) {
-  if (event.keyCode === 49) {
+  if (event.keyCode === 190) {
     enterKeyPressCount++;
     if (enterKeyPressCount === 4) {
-      // Perform redirection
-      window.location.href = './go.html';
-
-      // Store redirection status and timestamp
-      localStorage.setItem('wasRedirected', 'true');
-      localStorage.setItem('redirectionTime', Date.now());
-
-      enterKeyPressCount = 0; // Reset the count
+      // Redirect using window.location.href
+      window.location.href = './reload.html';
+      enterKeyPressCount = 0; // Reset the count after redirection
     }
   }
 });
 
-// Remove data if user enters the site directly (without needing redirection)
-if (!wasRedirected) {
-  localStorage.removeItem('wasRedirected');
-  localStorage.removeItem('redirectionTime');
-}
 
   
 </script>
