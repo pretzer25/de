@@ -4,34 +4,6 @@
 <title>iframe interaction</title>
 </head>
 <body>
-  <iframe id="iframe-container" src="https://gointerstellar.app/" width="100%" height="700"></iframe>
-
-  <script>
-    const iframe = document.getElementById("iframe-container");
-
-    iframe.onload = function() {
-      // Send a message to the iframe with the instructions
-      iframe.contentWindow.postMessage({
-        action: "fillAndClick",
-        password: "sharkie4life",
-        url: "example.com"
-      }, "https://example.org");
-    };
-
-    // Code for the iframe's page (if you have control over it)
-    window.addEventListener("message", (event) => {
-      if (event.origin === "https://de-mu.vercel.app" && event.data.action === "fillAndClick") {
-        const passwordInput = document.getElementById("session-password");
-        const urlInput = document.getElementById("session-url");
-        const createButton = document.getElementById("session-create-btn");
-        const goButton = document.getElementById("session-go");
-
-        passwordInput.value = event.data.password;
-        urlInput.value = event.data.url;
-        createButton.click();
-        goButton.click();
-      }
-    });
-  </script>
+  <iframe id="iframe-container" src="https://gointerstellar.app/" width="100%" height="100%"></iframe>
 </body>
 </html>
