@@ -9,6 +9,20 @@
 
 <div class="container-apps">
 
+<div class="container-apps">
+  <div class="column" data-url="https://example.com">
+    <a onclick="go(this)">
+      <img height="145" src="example.com">
+      <p>Study 1</p>
+    </a>
+  </div>
+  <div class="column" data-url="https://example.org">
+    <a onclick="go(this)">
+      <img height="145" src="example.com">
+      <p>Study 2</p>
+    </a>
+  </div>
+</div>
 		<div class="column">
 			<a onclick="openRandomStudyResource()">
 			  <img height="145" src="https://play-lh.googleusercontent.com/w0s3au7cWptVf648ChCUP7sW6uzdwGFTSTenE178Tz87K_w1P1sFwI6h1CLZUlC2Ug">
@@ -107,6 +121,12 @@
 		  </div>
 		
     	</div> 
+<script>
+function go(link) {
+  const url = link.parentElement.dataset.url;
+  window.location.href = "/./files/go.html?url=" + url;
+}
+</script>
 
 <br>
 <br>
