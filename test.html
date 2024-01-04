@@ -1,58 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Study</title>
-<style>
-body {
-  font-family: 'Impact', sans-serif;
-  font-weight: bold;
-}
-</style>
+<title>Code Generator</title>
 </head>
 <body>
+  <h1>Generated Code Snippets</h1>
+  <div id="output"></div>
   <script>
-    window.onload = function() {
-      alert("Welcome! Please follow these instructions: 1. fill in the password sharkie4life, do not press the go button 2. get Session ID 3. paste it below 4. click the go button at the bottom of the page, not the green big one.");
-    };
+    fetch('https://astroid.gg/worksheets/api/db.json')
+      .then(response => response.json())
+      .then(data => {
+        const outputDiv = document.getElementById('output');
 
-    function redirect() {
-      const id = document.getElementById("id-input").value;
-      localStorage.setItem("lastId", id); // Save the ID
+        data.forEach(item => {
+          const generatedCode = `
+            <p>Welcome to ${item.title} from ${item.source}</p>
+          `;
 
-      const url = `https://demo-opensource.rammerhead.org/${id}/https://www.google.com/search?q=now+gg+fortnite`;
-
-      // Option 1: Redirect to the URL
-      // window.location.href = url;
-
-      // Option 2: Load the URL in an iframe
-      document.getElementById("iframe-container").src = url;
-      alert("Top result should be it! :) ");
-    }
-  </script>
-
-  <iframe src="https://demo-opensource.rammerhead.org" width="100%" height="700" style="border:none;" id="iframe-container">
-  </iframe>
-
-  <br>
-  <input type="text" id="id-input" placeholder="Enter Session ID here">
-  <button onclick="redirect()">Go</button>
-  <br>
-  <p id="saved-id"></p>
-  <button id="fill-bttn" onclick="fillTextbox()">Fill</button>
-
-  <script>
-    // Retrieve saved ID if any
-    const savedId = localStorage.getItem("lastId");
-    if (savedId) {
-      document.getElementById("saved-id").textContent = "Previous ID: " + savedId;
-    }
-
-    function fillTextbox() {
-      const savedId = localStorage.getItem("lastId");
-      if (savedId) {
-        document.getElementById("id-input").value = savedId;
-      }
-    }
+          const codeElement = document.createElement('pre');
+          codeElement.textContent = generatedCode;
+          outputDiv.appendChild(codeElement);
+          outputDiv.appendChild(document.createElement('hr')); // Add a horizontal line separator
+        });
+      })
+      .catch(error => console.error('Error fetching or parsing JSON:', error));
   </script>
 </body>
 </html>
+gi
