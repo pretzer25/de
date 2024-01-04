@@ -17,10 +17,15 @@
       overflow-y: scroll;
       height: 400px;
     }
+    
+/* Wrap matching text within spans for highlighting */
+p span {
+  display: inline;
+}
 
-    .highlight {
-      background-color: yellow;
-    }
+.highlight {
+  background-color: yellow; /* Adjust highlight style as desired */
+}
   </style>
 </head>
 <body>
@@ -33,32 +38,39 @@
   </div>
 
   <script>
-    const searchBox = document.getElementById("search-box");
-    const content = document.getElementById("content");
+searchBox.addEventListener("input", function() {
+  const searchTerm = searchBox.value.toLowerCase();
+  const paragraphs = content.querySelectorAll("p");
 
-    searchBox.addEventListener("input", function() {
-      const searchTerm = searchBox.value.toLowerCase();
-      const paragraphs = content.querySelectorAll("p");
+  paragraphs.forEach(paragraph => {
+    const textNodes = paragraph.querySelectorAll("span");
+    textNodes.forEach(textNode => textNode.classList.remove("highlight"));
+  });
 
-      paragraphs.forEach(paragraph => paragraph.classList.remove("highlight"));
+  let matchesFound = false;
 
-      let matchesFound = false;
+  for (let i = 0; i < paragraphs.length; i++) {
+    const paragraphText = paragraphs[i].textContent.toLowerCase();
+    if (paragraphText.includes(searchTerm)) {
+      const startIndex = paragraphText.indexOf(searchTerm);
+      const endIndex = startIndex + searchTerm.length;
 
-      for (let i = 0; i < paragraphs.length; i++) {
-        const paragraphText = paragraphs[i].textContent.toLowerCase();
-        if (paragraphText.includes(searchTerm)) {
-          paragraphs[i].classList.add("highlight");
-          matchesFound = true;
-        }
-      }
+      const textNode = paragraph.childNodes[0]; // Assuming paragraphs contain a single text node
+      const matchingTextNode = textNode.splitText(startIndex);
+      matchingTextNode.splitText(endIndex - startIndex);
+      matchingTextNode.classList.add("highlight");
 
-      if (matchesFound) {
-        paragraphs[0].scrollIntoView({ behavior: "smooth", block: "center" });
-      } else {
-        // Handle no matches found scenario (optional)
-        console.log("No matches found!");
-      }
-    });
+      matchesFound = true;
+    }
+  }
+
+  if (matchesFound) {
+    paragraphs[0].scrollIntoView({ behavior: "smooth", block: "center" });
+  } else {
+    console.log("No matches found!");
+  }
+});
+
   </script>
 </body>
 </html>
