@@ -191,6 +191,12 @@
     image.style.transform = `rotate(${image.style.transform ? parseFloat(image.style.transform.slice(7)) + 1 : 1}deg)`;
   }, 10); // Adjust the interval (currently 10 milliseconds) to control the spinning speed
 </script>
+<script>
+function go(link) {
+  const url = link.parentElement.dataset.url;
+  window.location.href = "/./files/go.html?url=" + url;
+}
+</script>
 
 </body>
 </html>
