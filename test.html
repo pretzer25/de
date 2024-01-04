@@ -14,7 +14,7 @@
 
         data.forEach(item => {
           const generatedCode = `
-            <p>Welcome to ${item.title} from ${item.source}</p>
+            <div class="column" data-url="${item.source}"> <a onclick="go(this)"> <img height="145" src="IMG"> <p>${item.title}</p> </a> </div>
           `;
 
           const codeElement = document.createElement('pre');
