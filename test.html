@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Search</title>
+  <style>
+    #search-box {
+      width: 200px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    #content {
+      overflow-y: scroll;
+      height: 400px;
+    }
+
+    .highlight {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <h1>Search for Text:</h1>
+  <input type="text" id="search-box" placeholder="Search...">
+  <div id="content">
+    <p>Paragraph 1 with some text that you might search for.</p>
+    <p>This paragraph does not contain the search term.</p>
+    <p>And here's another paragraph with the target text again!</p>
+  </div>
+
+  <script>
+    const searchBox = document.getElementById("search-box");
+    const content = document.getElementById("content");
+
+    searchBox.addEventListener("input", function() {
+      const searchTerm = searchBox.value.toLowerCase();
+      const paragraphs = content.querySelectorAll("p");
+
+      paragraphs.forEach(paragraph => paragraph.classList.remove("highlight"));
+
+      let matchesFound = false;
+
+      for (let i = 0; i < paragraphs.length; i++) {
+        const paragraphText = paragraphs[i].textContent.toLowerCase();
+        if (paragraphText.includes(searchTerm)) {
+          paragraphs[i].classList.add("highlight");
+          matchesFound = true;
+        }
+      }
+
+      if (matchesFound) {
+        paragraphs[0].scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        // Handle no matches found scenario (optional)
+        console.log("No matches found!");
+      }
+    });
+  </script>
+</body>
+</html>
