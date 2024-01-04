@@ -17,22 +17,6 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"/>
  	
   <!-- JS -->
-<script>fetch('./nav.html')
-  .then(response => response.text())
-  .then(htmlContent => {
-    const kContent = document.createElement('div');
-    kContent.innerHTML = htmlContent;
-    document.body.appendChild(kContent);
-
-    // Execute scripts within the fetched content
-    const scripts = kContent.querySelectorAll('script');
-    scripts.forEach(script => {
-      const newScript = document.createElement('script');
-      newScript.textContent = script.textContent;
-      document.head.appendChild(newScript);
-    });
-  });
-</script>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <script src="/./key.js"></script>
@@ -164,16 +148,33 @@
 
 </body>
 </html>
+<script>
+  // Fetch nav.html first and ensure its content is fully processed before fetching k.html
+  fetch('./nav.html')
+    .then(response => response.text())
+    .then(htmlContent => {
+      const navContent = document.createElement('div');
+      navContent.innerHTML = htmlContent;
+      document.body.appendChild(navContent);
 
-  <script>
-    fetch('./k.html')
-      .then(response => response.text())
-      .then(htmlContent => {
-        const kContent = document.createElement('div');
-        kContent.innerHTML = htmlContent;
-        document.body.appendChild(kContent);
+      // Execute scripts within the fetched nav content
+      const scripts = navContent.querySelectorAll('script');
+      scripts.forEach(script => {
+        const newScript = document.createElement('script');
+        newScript.textContent = script.textContent;
+        document.head.appendChild(newScript);
       });
-  </script>
+
+      // After nav.html is fully processed, fetch k.html
+      fetch('./k.html')
+        .then(response => response.text())
+        .then(htmlContent => {
+          const kContent = document.createElement('div');
+          kContent.innerHTML = htmlContent;
+          document.body.appendChild(kContent);
+        });
+    });
+</script>
 
 
 	<div id="particles-js"></div>
