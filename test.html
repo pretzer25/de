@@ -41,7 +41,7 @@
   <script>
     function searchColumns() {
       var searchTerm = document.getElementById('searchInput').value.toLowerCase();
-      var columns = document.querySelectorAll('.column');
+      var columns = document.querySelectorAll('.column:not(#results)');
       var resultsContainer = document.getElementById('results');
       resultsContainer.innerHTML = '';
 
