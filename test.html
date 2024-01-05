@@ -45,21 +45,22 @@
   <div id="results"></div>
 
   <script>
-    function searchParagraphs() {
-      var searchTerm = document.getElementById('searchInput').value.toLowerCase();
-      var paragraphs = document.querySelectorAll('p');
-      var resultsContainer = document.getElementById('results');
-      resultsContainer.innerHTML = '';
+function searchDivs() {
+  var searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  var divs = document.querySelectorAll('div'); // Target div elements
+  var resultsContainer = document.getElementById('results');
+  resultsContainer.innerHTML = '';
 
-      paragraphs.forEach(function(paragraph) {
-        var text = paragraph.textContent.toLowerCase();
-        if (text.includes(searchTerm)) {
-          var matchedParagraph = document.createElement('p');
-          matchedParagraph.textContent = paragraph.textContent;
-          resultsContainer.appendChild(matchedParagraph);
-        }
-      });
+  divs.forEach(function(div) {
+    var text = div.textContent.toLowerCase();
+    if (text.includes(searchTerm)) {
+      var matchedDiv = document.createElement('div'); // Create a div for results
+      matchedDiv.textContent = div.textContent;
+      resultsContainer.appendChild(matchedDiv);
     }
+  });
+}
+
   </script>
 </body>
 </html>
