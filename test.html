@@ -1,29 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Auto Search Columns</title>
-    <!-- CSS -->
-  <style>
-    body {
-      background-color: #191919;
-    }
-  </style>
-  <link rel="stylesheet" href="/./main.css">
-  <link rel="stylesheet" href="/./icons.css">
-  <link rel="stylesheet" href="/./apps.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"/>
- 	
-  <!-- JS -->
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-  <script src="/./key.js"></script>
 
 </head>
+  
 <body>
-  <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchColumns()">
-    <div class="container-apps">
-    <div id="results"></div>
-    </div>
+   <input type="text" id="searchbarbottom" onkeyup="search_bar()" placeholder="Search...">
   <br> <br> <br> <br> <br>
   <hr>
   <div class="container-apps">
@@ -39,45 +21,22 @@
   </div>
 
   <script>
-    function searchColumns() {
-      var searchTerm = document.getElementById('searchInput').value.toLowerCase();
-      var columns = document.querySelectorAll('.column');
-      var resultsContainer = document.getElementById('results');
-      resultsContainer.innerHTML = '';
+function search_bar() {
+  var input = document.getElementById("searchbarbottom");
+  var filter = input.value.toLowerCase();
+  var games = document.getElementsByClassName("column");
 
-      columns.forEach(function(column) {
-        var columnText = column.querySelector('p').textContent.toLowerCase();
-        var imageURL = column.querySelector('img').getAttribute('src');
-        var urlAttribute = column.getAttribute('data-url');
+  for (var i = 0; i < games.length; i++) {
+    var game = games[i];
+    var name = game.getElementsByTagName("p")[0].textContent.toLowerCase();
 
-        if (columnText.includes(searchTerm) && searchTerm !== '') {
-          var matchedColumn = document.createElement('div');
-          matchedColumn.className = 'column';
-          matchedColumn.setAttribute('data-url', urlAttribute);
-
-          var anchor = document.createElement('a');
-          anchor.setAttribute('onclick', 'go(this)');
-
-          var image = document.createElement('img');
-          image.setAttribute('height', '145');
-          image.setAttribute('src', imageURL);
-
-          var paragraph = document.createElement('p');
-          paragraph.textContent = column.querySelector('p').textContent;
-
-          anchor.appendChild(image);
-          anchor.appendChild(paragraph);
-          matchedColumn.appendChild(anchor);
-          resultsContainer.appendChild(matchedColumn);
-        }
-      });
+    if (name.includes(filter)) {
+      game.style.display = "block";
+    } else {
+      game.style.display = "none";
     }
-
-    function go(element) {
-      var url = element.parentNode.getAttribute('data-url');
-      // Implement logic to navigate to the URL
-      console.log("Navigating to:", url);
-    }
+  }
+}
   </script>
 
   <script>
