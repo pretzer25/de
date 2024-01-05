@@ -68,5 +68,13 @@
       console.log("Navigating to:", url);
     }
   </script>
+
+  <script>
+function go(link) {
+  const url = link.parentElement.dataset.url;
+  window.location.href = "/./files/go.html?url=" + url;
+}
+</script>
+  
 </body>
 </html>
