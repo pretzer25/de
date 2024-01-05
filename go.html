@@ -148,6 +148,11 @@
 
 </body>
 </html>
+
+   <input type="text" id="searchbarbottom" onkeyup="search_bar()" placeholder="Search...">
+  <br> <br> <br> <br> <br>
+  <hr>
+
 <script>
   // Fetch nav.html first and ensure its content is fully processed before fetching k.html
   fetch('./nav.html')
@@ -175,6 +180,25 @@
         });
     });
 </script>
+
+  <script>
+function search_bar() {
+  var input = document.getElementById("searchbarbottom");
+  var filter = input.value.toLowerCase();
+  var games = document.getElementsByClassName("column");
+
+  for (var i = 0; i < games.length; i++) {
+    var game = games[i];
+    var name = game.getElementsByTagName("p")[0].textContent.toLowerCase();
+
+    if (name.includes(filter)) {
+      game.style.display = "block";
+    } else {
+      game.style.display = "none";
+    }
+  }
+}
+  </script>
 
 <style>
   /* Position navContent absolutely to overlay kContent */
