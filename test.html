@@ -1,62 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-<script> src="/./test.js" </script>
-<style>
-mark {
-  background: yellow;
-}
+<html>
+<head>
+  <title>Paragraph Search</title>
+  <style>
+    /* Add some basic styling for demonstration */
+    #results {
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" id="searchInput" placeholder="Search...">
+  <button onclick="searchParagraphs()">Search</button>
 
-mark.current {
-  background: orange;
-}
-</style>
-<div class="header">
-  Search:
-  <input type="search" placeholder="Lorem">
-  <button data-search="next">&darr;</button>
-  <button data-search="prev">&uarr;</button>
-  <button data-search="clear">✖</button>
-</div>
+  <p>This is a paragraph with some content.</p>
+  <p>Another paragraph here.</p>
+  <p>And one more for demonstration.</p>
+  <div id="results"></div>
 
-<div class="content">
-  <p>
-    hellos
-  </p>
+  <script>
+    function searchParagraphs() {
+      var searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      var paragraphs = document.querySelectorAll('p');
+      var resultsContainer = document.getElementById('results');
+      resultsContainer.innerHTML = '';
 
-  <p>
-   dear
-    sed.
-  </p>
-
-  <p>
-    travel
-  </p>
-
-  <p>
-    your
-  </p>
-
-  <p>
-    quest
-  </p>
-
-  <p>
-    is to find diamonds
-  </p>
-
-  <p>
-    and
-  </p>
-
-  <p>
-    bring
-  </p>
-
-  <p>
-    them
-  </p>
-
-  <p>
-    to me
-  </p>
-</div>
+      paragraphs.forEach(function(paragraph) {
+        var text = paragraph.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+          var matchedParagraph = document.createElement('p');
+          matchedParagraph.textContent = paragraph.textContent;
+          resultsContainer.appendChild(matchedParagraph);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
