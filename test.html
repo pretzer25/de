@@ -2,19 +2,27 @@
 <html>
 <head>
   <title>Auto Search Columns</title>
+    <!-- CSS -->
   <style>
-    /* Add some basic styling for demonstration */
-    .column {
-      border: 1px solid #ccc;
-      margin: 5px;
-      padding: 10px;
+    body {
+      background-color: #191919;
     }
   </style>
+  <link rel="stylesheet" href="/./main.css">
+  <link rel="stylesheet" href="/./icons.css">
+  <link rel="stylesheet" href="/./apps.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"/>
+ 	
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <script src="/./key.js"></script>
+
 </head>
 <body>
   <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchColumns()">
     <div id="results"></div>
-  
+  <hr>
   <div class="container-apps">
     
             <div class="column" data-url="https://astroid.gg/assignments/OfflineParadise/index.html"> <a onclick="go(this)"> <img height="145" src="https://upload.wikimedia.org/wikipedia/commons/8/80/Icon_no.svg"> <p>Offline Paradise</p> </a> </div>
