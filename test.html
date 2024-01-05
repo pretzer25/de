@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Complex Column Search</title>
+  <title>Auto Search Columns</title>
   <style>
     /* Add some basic styling for demonstration */
     .column {
@@ -12,9 +12,8 @@
   </style>
 </head>
 <body>
-  <input type="text" id="searchInput" placeholder="Search...">
-  <button onclick="searchColumns()">Search</button>
-
+  <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchColumns()">
+  
   <div class="column" data-url="URL1">
     <a onclick="go(this)">
       <img height="145" src="Image1.png">
@@ -47,7 +46,7 @@
         var imageURL = column.querySelector('img').getAttribute('src');
         var urlAttribute = column.getAttribute('data-url');
 
-        if (columnText.includes(searchTerm)) {
+        if (columnText.includes(searchTerm) && searchTerm !== '') {
           var matchedColumn = document.createElement('div');
           matchedColumn.className = 'column';
           matchedColumn.setAttribute('data-url', urlAttribute);
