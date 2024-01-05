@@ -13,6 +13,7 @@
 </head>
 <body>
   <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchColumns()">
+    <div id="results"></div>
   
   <div class="column" data-url="URL1">
     <a onclick="go(this)">
@@ -32,7 +33,6 @@
       <p>Text 3</p>
     </a>
   </div>
-  <div id="results"></div>
 
   <script>
     function searchColumns() {
