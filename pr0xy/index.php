@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>PHP in HTML</title>
-</head>
-<body>
-
 <?php
 /*
 miniProxy - A simple PHP web proxy. <https://github.com/joshdick/miniProxy>
@@ -498,6 +491,3 @@ if (stripos($contentType, "text/html") !== false) {
   header("Content-Length: " . strlen($responseBody), true);
   echo $responseBody;
 }
-
-</body>
-</html>
