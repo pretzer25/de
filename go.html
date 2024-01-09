@@ -159,18 +159,26 @@
   border-radius: 25px;
   width: 350px;
 }
-
+#searchbartop {
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 25px;
+  width: 390px;
+}
+	
 </style>
 <br><br>
 <script>
-    function search_bar() {
-        var input = document.getElementById("searchbarbottom").value;
-        var url = "https://example.org/?" + input;
-        window.location.href = url;
+    function search_bart(event) {
+        if (event.keyCode === 13) {
+            var input = document.getElementById("searchbartop").value;
+            var url = "https://example.org/?" + input;
+            window.location.href = url;
+        }
     }
 </script>
 
-         <center><input type="text" id="searchbarbotop" value="https://" placeholder="Search the web..."></center>
+         <center><input type="text" id="searchbartop" value="https://" onkeyup="search_bart(event)" placeholder="Search the web..."></center>
 
 	<center><input type="text" id="searchbarbottom" onkeyup="search_bar()" placeholder="Search..."></center>
 
