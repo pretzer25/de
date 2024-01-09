@@ -120,96 +120,13 @@
 	      <!-- Navbar start -->
     <div id="site-header" style="margin-bottom:10px;">
       <a href="/" style="background-color: #202020;height:45px;color:black;">
-		<h1><a  class="Pretzer" style="cursor: default;" href="/./go.html"><img src="/./solar.png" width="60" height="60" id="lg"></a></h1>
-	        <h1><a  class="Pretzer" style="cursor: default;" href="/./go.html"><img src="/./solar.png" width="60" height="60" id="lg"></a></h1>
+<div style="text-align: right;">
+    <h1 style="display: inline-block;"><a class="Pretzer" style="cursor: default;" href="/./go.html"><img src="/./solar.png" width="60" height="60" id="lg"></a></h1>
+    <h1 style="display: inline-block;"><a class="Pretzer" style="cursor: default;" href="/./go.html"><img src="/./solar.png" width="60" height="60" id="lg"></a></h1>
+</div>
         </span>
       </a>
     </div>
-	  <script src="/./key.js"></script>
-  <style>
-    .taskbar {
-      position: fixed;
-      top: 95%;
-      right: 0;
-      transform: translateY(-50%);
-      width: 100%;
-      height: 60px;
-      background-color: transparent;
-      backdrop-filter: blur(20px);
-      backface-visibility: visible;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 10px;
-      font-family: 'Oswald', sans-serif; /* Set font family */
-      font-weight: bold; /* Set bold style */
-    }
-
-    .icons {
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly; /* Adjusted centering method */
-    }
-
-    .icons a {
-      margin: 0 15px; /* Removed individual left margin for each icon */
-    }
-
-    .icons img {
-      width: 24px;
-      height: 24px;
-      fill: #fff; /* Adjust icon color as needed */
-    }
-
-    .system-tray {
-      display: flex;
-      align-items: center;
-    }
-
-    .date-time {
-      margin-right: 10px;
-      font-size: 12px;
-      color: #fff;
-    }
-
-    .battery-percentage {
-      font-size: 12px;
-      color: #fff;
-    }
-
-    a[onclick="openRandomStudyResource()"] img {
-  cursor: pointer;
-}
-    
-  </style>
-</head>
-<body>
-  <div class="taskbar">
-    <div class="icons">
-      <a href="/./go.html"><img src="/./solar.png"></a>
-      <a href="/./chat"><img src="/./chat/favicon.ico"></a>
-      <a onclick="openRandomStudyResource()"><img src="https://play-lh.googleusercontent.com/w0s3au7cWptVf648ChCUP7sW6uzdwGFTSTenE178Tz87K_w1P1sFwI6h1CLZUlC2Ug"></a>
-      <a href="/./" style="text-decoration: none; color: white;">
-          <p>:(</p>
-      </a>
-
-    </div>
-    <div class="system-tray">
-      <span class="date-time"></span>
-      <span class="battery-percentage">‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ </span> </div>
-  </div>
-
-<script>
-  // Update the time every second (without displaying seconds)
-  setInterval(() => {
-   const now = new Date();
-   const dateString = now.toLocaleDateString();
-   const timeString = now.toLocaleTimeString('short', { hour12: false }); // Remove seconds
-   const dateTimeElement = document.querySelector('.date-time');
-   dateTimeElement.textContent = `${dateString} ${timeString}`;
-  }, 1000); // Update every 1000 milliseconds (1 second)
- </script>
-</body>
     <!-- Navbar end -->
 	
 	<div style="z-index: 99; margin-top: -33px !important; background-color: #111111ed !important;" id="sidebarMenu">
