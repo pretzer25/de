@@ -163,22 +163,42 @@
   border: 2px solid black;
   padding: 10px;
   border-radius: 25px;
-  width: 390px;
+  width: 350px;
 }
 	
 </style>
 <br><br>
 <script>
-    function search_bart(event) {
-        if (event.keyCode === 13) {
-            var input = document.getElementById("searchbartop").value;
-            var url = "https://example.org/?" + input;
-            window.location.href = url;
-        }
-    }
+    document.addEventListener("DOMContentLoaded", function() {
+        var searchInput = document.getElementById("newSearchBar");
+        searchInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                var input = searchInput.value.toLowerCase().trim();
+                var url;
+                
+                if (input.startsWith("https://")) {
+                    url = input;
+                } else if (
+                    input.endsWith(".org") ||
+                    input.endsWith(".com") ||
+                    input.endsWith(".net") ||
+                    input.endsWith(".edu") ||
+                    input.endsWith(".gov")
+                    // Add more popular extensions if needed
+                ) {
+                    url = "https://" + input;
+                } else {
+                    url = "https://www.google.com/search?q=" + encodeURIComponent(input);
+                }
+
+                window.location.href = url;
+            }
+        });
+    });
 </script>
 
-         <center><input type="text" id="searchbartop" value="https://" onkeyup="search_bart(event)" placeholder="Search the web..."></center>
+<center><input type="text" id="newSearchBar" placeholder="Type url or search terms to search them"></center>
+
 
 	<center><input type="text" id="searchbarbottom" onkeyup="search_bar()" placeholder="Search..."></center>
 
