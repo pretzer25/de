@@ -162,6 +162,16 @@
 
 </style>
 <br><br>
+<script>
+    function search_bar() {
+        var input = document.getElementById("searchbarbottom").value;
+        var url = "https://example.org/?" + input;
+        window.location.href = url;
+    }
+</script>
+
+         <center><input type="text" id="searchbarbottom" value="https://" onkeyup="search_bar()" placeholder="Search the web"></center>
+
 	<center><input type="text" id="searchbarbottom" onkeyup="search_bar()" placeholder="Search..."></center>
 
   <br> <br> <br>
