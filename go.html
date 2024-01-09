@@ -252,7 +252,7 @@
 
   <br> <br> <br>
 
-	<!--
+
 <script>
 
   // Fetch nav.html first and ensure its content is fully processed before fetching k.html
@@ -270,9 +270,7 @@
         newScript.textContent = script.textContent;
         document.head.appendChild(newScript);
       });
-	    -->
 
-<script>
       // After nav.html is fully processed, fetch k.html
       fetch('./k.html')
         .then(response => response.text())
