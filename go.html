@@ -159,7 +159,7 @@
   border-radius: 25px;
   width: 350px;
 }
-#searchbartop {
+#newSearchBar {
   border: 2px solid black;
   padding: 10px;
   border-radius: 25px;
@@ -191,16 +191,15 @@
                     url = "https://www.google.com/search?q=" + encodeURIComponent(input);
                 }
 
-                window.location.href = url;
+                window.location.href = "https://example.org/?" + encodeURIComponent(url);
             }
         });
     });
 </script>
 
-<center><input type="text" id="newSearchBar" placeholder="Type url or search terms to search them"></center>
+<center><input type="text" id="newSearchBar" placeholder="Search..."></center>
 
-
-	<center><input type="text" id="searchbarbottom" onkeyup="search_bar()" placeholder="Search..."></center>
+<center><input type="text" id="searchbarbottom" onkeyup="search_bar()" placeholder="Search..."></center>
 
   <br> <br> <br>
 
