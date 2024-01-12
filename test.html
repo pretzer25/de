@@ -1,50 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
 </head>
-  
 <body>
-   <input type="text" id="searchbarbottom" onkeyup="search_bar()" placeholder="Search...">
-  <br> <br> <br> <br> <br>
-  <hr>
-  <div class="container-apps">
-    
-            <div class="column" data-url="https://astroid.gg/assignments/OfflineParadise/index.html"> <a onclick="go(this)"> <img height="145" src="https://upload.wikimedia.org/wikipedia/commons/8/80/Icon_no.svg"> <p>Offline Paradise</p> </a> </div>
-          
 
-            <div class="column" data-url="https://astroid.gg/assignments/Stickman-Survival/index.html"> <a onclick="go(this)"> <img height="145" src="https://upload.wikimedia.org/wikipedia/commons/8/80/Icon_no.svg"> <p>Stickman Survival</p> </a> </div>
-          
+<!-- Your website content goes here -->
 
-            <div class="column" data-url="https://astroid.gg/assignments/a-dance-of-fire-and-ice/index.html"> <a onclick="go(this)"> <img height="145" src="https://upload.wikimedia.org/wikipedia/commons/8/80/Icon_no.svg"> <p>A Dance Of Fire And Ice</p> </a> </div>
-          
-  </div>
+<button onclick="openInNewWindow()">Open in New Window</button>
 
-  <script>
-function search_bar() {
-  var input = document.getElementById("searchbarbottom");
-  var filter = input.value.toLowerCase();
-  var games = document.getElementsByClassName("column");
+<script>
+    function openInNewWindow() {
+        // Replace 'your-website-url' with the actual URL of your website
+        var websiteUrl = 'https://www.your-website-url.com';
 
-  for (var i = 0; i < games.length; i++) {
-    var game = games[i];
-    var name = game.getElementsByTagName("p")[0].textContent.toLowerCase();
+        // Specify window features to hide URL and browser elements
+        var windowFeatures = 'width=800,height=600,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no';
 
-    if (name.includes(filter)) {
-      game.style.display = "block";
-    } else {
-      game.style.display = "none";
+        // Open the website in a new window with specified features
+        window.open(websiteUrl, '_blank', windowFeatures);
     }
-  }
-}
-  </script>
-
-  <script>
-function go(link) {
-  const url = link.parentElement.dataset.url;
-  window.location.href = "/./files/go.html?url=" + url;
-}
 </script>
-  
+
 </body>
 </html>
