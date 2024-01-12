@@ -14,13 +14,13 @@
 <script>
     function openInNewWindow() {
         // Replace 'your-website-url' with the actual URL of your website
-        var websiteUrl = 'https://www.example.com';
+        var websiteUrl = 'https://www.your-website-url.com';
 
-        // Specify window features to hide URL and browser elements
-        var windowFeatures = 'width=800,height=600,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no';
+        // Open the website in a new window
+        var newWindow = window.open('', '_blank', 'width=800,height=600');
 
-        // Open the website in a new window with specified features
-        window.open(websiteUrl, '_blank', windowFeatures);
+        // Write a document with a meta refresh to the desired URL
+        newWindow.document.write('<html><head><meta http-equiv="refresh" content="0;url=' + websiteUrl + '"></head><body></body></html>');
     }
 </script>
 
