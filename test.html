@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Display IP from JSON</title>
+<title>Your IP Address</title>
 </head>
 <body>
-  <div id="ip-display"></div>
+  <p id="ip-display">Fetching your IP...</p>
   <script>
-    fetch('https://api.my-ip.io/v2/ip.json')
-      .then(response => response.json())
-      .then(data => {
-        const ip = data.ip; // Assuming the IP is located within a property named "ip"
-        document.getElementById('ip-display').textContent = ip;
+    // Function to fetch the user's IP using WebRTC
+    function getIP() {
+      return new Promise((resolve, reject) => {
+        const myPeerConnection = new RTCPeerConnection({ iceServers: [] });
+        // Create a temporary data channel
+        myPeerConnection.createDataChannel('');
+        // Create an offer SDP
+        myPeerConnection.createOffer()
+          .then(sdp => myPeerConnection.setLocalDescription(sdp))
+          .then(() => {
+            const ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g;
+            const candidate = myPeerConnection.localDescription.sdp.match(ipRegex)[0];
+            resolve(candidate);
+          })
+          .catch(error => reject(error));
+      });
+    }
+
+    getIP()
+      .then(ip => {
+        document.getElementById('ip-display').textContent = 'Your IP address is: ' + ip;
       })
       .catch(error => {
-        console.error('Error fetching or parsing JSON:', error);
-        document.getElementById('ip-display').textContent = '(We don't even know that)';
+        console.error('Error fetching IP:', error);
+        document.getElementById('ip-display').textContent = 'Error fetching IP';
       });
   </script>
 </body>
