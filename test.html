@@ -1,28 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
+<title>Display IP from JSON</title>
 </head>
 <body>
-
-<!-- Your website content goes here -->
-
-<button onclick="openInNewWindow()">Open in New Window</button>
-
-<script>
-    function openInNewWindow() {
-        // Replace 'your-website-url' with the actual URL of your website
-        var websiteUrl = 'https://www.your-website-url.com';
-
-        // Open the website in a new window
-        var newWindow = window.open('', '_blank', 'width=800,height=600');
-
-        // Write a document with a meta refresh to the desired URL
-        newWindow.document.write('<html><head><meta http-equiv="refresh" content="0;url=' + websiteUrl + '"></head><body></body></html>');
-    }
-</script>
-
+  <div id="ip-display"></div>
+  <script>
+    fetch('https://api.myip.com')
+      .then(response => response.json())
+      .then(data => {
+        const ip = data.ip; // Assuming the IP is located within a property named "ip"
+        document.getElementById('ip-display').textContent = ip;
+      })
+      .catch(error => {
+        console.error('Error fetching or parsing JSON:', error);
+        document.getElementById('ip-display').textContent = '(We don't even know that)';
+      });
+  </script>
 </body>
 </html>
